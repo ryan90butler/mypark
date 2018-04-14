@@ -6,7 +6,7 @@ import './Dashboard.scss';
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props.getUserInfo)
+    console.log(this.props)
     return (
       <div className="Dashboard">
       <Header/>
@@ -19,8 +19,8 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({getUserInfo}){
-  return {getUserInfo}
+function mapStateToProps({userInfo}){
+  return {userInfo}
 }
 
 export default connect(mapStateToProps)(Dashboard);
