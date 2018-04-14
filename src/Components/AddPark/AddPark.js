@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
+import {Link} from 'react-router-dom';
 import './AddPark.scss';
 
 class AddPark extends Component {
@@ -8,6 +9,9 @@ class AddPark extends Component {
       <div className="AddPark">
       <Header/>
         AddPark
+
+        <Link to='/dashboard'>Back</Link>
+        <Link to='/details/:id'>Detail</Link>
 
       </div>
     );

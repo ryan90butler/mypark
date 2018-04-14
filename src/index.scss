@@ -1,5 +1,10 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+@import './variables.scss';
+
+
+
+@import './Components/AddPark/AddPark.scss';
+@import './Components/Dashboard/Dashboard.scss';
+@import './Components/Details/Details.scss';
+@import './Components/Header/Header.scss';
+@import './Components/Login/Login.scss';
+@import './Components/UpdateUser/UpdateUser.scss';

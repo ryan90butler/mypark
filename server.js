@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
+const session = require('express-session');
+// const passport = require('passport');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -19,12 +22,23 @@ massive(process.env.CONNECTION_STRING)
         console.warn('Failed to connect:');
         console.error(err);
     });
+    app.use(checkDb());
 
+    app.use(session({
+        name: 'MyPark',
+        secret: process.env.SESSION_SECRET,
+        cookie: {
+            expires:  5 * 24 * 60 * 60 *1000,
+        },
+        saveUninitialized: false,
+        rolling: true,
+        resave: false,
+    }));
 
     app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
 
-      req.db.user_table.findOne({ email, password })
+      req.db.users.findOne({ email, password })
           .then(user => {
               if (!user) {
                   return res.status(401).send({ success: false, message: 'it did not work' });
@@ -38,19 +52,51 @@ massive(process.env.CONNECTION_STRING)
     });
 
     app.post('/api/register', (req, res) => {
-      const { email, password } = req.body;
+      const { email, password, firstName, lastName, city, state, zip } = req.body;
 
-      req.db.user_table.insert({ email, password })
+    //  password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
+
+      req.db.users.insert({firstname:firstName, lastname:lastName, email, password,  city, state, zip })
           .then(user => {
-            req.session.user = user.user_id
+            req.session.user = user.id
               res.send({ success: true, message: 'logged in successfully' });
           })
           .catch(err =>{
             console.log(err)
           }
-
           );
     });
+
+    app.get(`/api/logout`, (req, res) =>{
+        req.session.destroy();
+        res.send({ success: true, message: 'Logged out successfully' });
+    })
+
+    app.get('/api/user-data', (req, res) => {
+        const userId = req.session.user;
+
+        req.db.users.getUserInfo({ userId })
+            .then((r) => res.send(r))
+            .catch(err =>{
+                console.log(err)
+              }
+              );
+    });
+
+
+    function checkDb() {
+        return (req, res, next) => {
+            const db = app.get('db');
+
+            if (db) {
+                req.db = db;
+                next();
+            }
+            else {
+                res.status(500).send({ message: 'this died' });
+            }
+        };
+    }
 
 
 const port = process.env.PORT || 8080

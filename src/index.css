@@ -1,0 +1,23 @@
+.Header {
+  background: black;
+  color: white;
+  height: 100px; }
+  .Header a {
+    color: white;
+    text-decoration: none; }
+
+.login-register-container {
+  border: 1px black solid;
+  margin-top: 20%;
+  width: 410px;
+  height: 500px;
+  display: flex;
+  justify-content: center; }
+
+.login-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+
+/*# sourceMappingURL=index.css.map */
