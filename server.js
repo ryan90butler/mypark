@@ -43,7 +43,7 @@ massive(process.env.CONNECTION_STRING)
               if (!user) {
                   return res.status(401).send({ success: false, message: 'it did not work' });
               }
-              req.session.user = user.user_id
+              req.session.user = user.id
               res.send({ success: true, message: 'Logged in successfully' });
           })
           .catch(err=>{
@@ -73,14 +73,10 @@ massive(process.env.CONNECTION_STRING)
     })
 
     app.get('/api/user-data', (req, res) => {
-        const userId = req.session.user;
-
-        req.db.users.getUserInfo({ userId })
-            .then((r) => res.send(r))
-            .catch(err =>{
-                console.log(err)
-              }
-              );
+        req.db.getUserInfo([req.session.user])
+        .then(r => {
+            res.send(r)
+        })
     });
 
 

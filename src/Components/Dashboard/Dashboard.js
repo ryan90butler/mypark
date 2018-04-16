@@ -1,17 +1,40 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import {connect} from 'react-redux';
+import {getUser} from '../../Redux/Actions/action';
+import { bindActionCreators} from 'redux';
 import {Link} from 'react-router-dom';
 import './Dashboard.scss';
 
 class Dashboard extends Component {
-  render() {
-    console.log(this.props)
+  constructor(props){
+    super(props)
+    this.state = {
+        isLoaded: false,
+        firstName: ''
+    }
+}
+
+    componentDidMount(){
+      this.props.getUser()
+      .then((r)=>{
+        this.setState({
+            isLoaded:true,
+            firstName: r.value.data[0].firstname
+        });
+    })
+    }
+
+    render() {
+      // console.log(this.props.userInfo[0].zip)
     return (
       <div className="Dashboard">
       <Header/>
+      This is the dashboard of {this.state.firstName}
+
+      <br/>
+
         Dashboard
-        {this.props.getUserInfo}
 
         <Link to='/addpark'>Search for Parks</Link>
       </div>
@@ -23,4 +46,8 @@ function mapStateToProps({userInfo}){
   return {userInfo}
 }
 
-export default connect(mapStateToProps)(Dashboard);
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({getUser}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
