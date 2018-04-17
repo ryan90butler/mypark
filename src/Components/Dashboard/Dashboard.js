@@ -26,7 +26,6 @@ class Dashboard extends Component {
     }
 
     render() {
-      // console.log(this.props.userInfo[0].zip)
     return (
       <div className="Dashboard">
       <Header/>

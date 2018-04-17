@@ -4,7 +4,8 @@ const cors = require('cors');
 const massive = require('massive');
 const session = require('express-session');
 // const passport = require('passport');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
+const {getPark, searchPark} = require('./server/NPSservice');
 
 require('dotenv').config();
 
@@ -34,6 +35,20 @@ massive(process.env.CONNECTION_STRING)
         rolling: true,
         resave: false,
     }));
+
+    app.get('/api/parks',(req,res) => {
+        getPark(req.query.state)
+          .then(r => {
+            res.send(r).status(200);
+          })
+      });
+
+    app.get('/api/search-parks',(req,res) => {
+        searchPark(req.query.search)
+          .then(r => {
+            res.send(r).status(200);
+        })
+    });
 
     app.post('/api/login', (req, res) => {
       const { email, password } = req.body;

@@ -23,7 +23,7 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-        Header
+        <Link to='/dashboard'>Header</Link>
 
         <Link className="header-link"to='/updateuser'>Update User</Link>
         <button className="header-link" onClick={this.sessionDestroy}>Logout</button>

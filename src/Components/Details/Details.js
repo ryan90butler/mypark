@@ -10,7 +10,7 @@ class Details extends Component {
       <Header/>
         Details
 
-      <Link to='/dashboard'>Back</Link>
+      <Link to='/addpark'>Back</Link>
 
       </div>
     );

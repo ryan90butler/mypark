@@ -8,3 +8,11 @@ export function getUser(){
     payload
 }
 }
+
+export function addToParks(){
+  const payload = axios.get('/api/park-data');
+  return {
+    type: GET_USER,
+    payload
+}
+}
