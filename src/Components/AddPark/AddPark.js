@@ -10,10 +10,12 @@ class AddPark extends Component {
       this.state={
         state: "",
         search: "",
-        parkData:[]
+        parkData:[],
+        parkCode: ""
       }
       this.handleChange = this.handleChange.bind(this)
       this.getPark = this.getPark.bind(this)
+      this.getDetails = this.getDetails.bind(this)
   }
 
   handleChange(e){
@@ -28,14 +30,18 @@ class AddPark extends Component {
     e.preventDefault();
     axios.get(`/api/parks?state=${this.state.state}`)
     .then(r => {
-      console.log(r)
       this.setState({
-        parkData: r.data.data
+        parkData: r.data.data,
+        parkCode: r.data.data[0].parkCode
       })
     })
       .catch(error => {
         console.warn(error)
       })
+  }
+
+  getDetails(){
+    this.props.history.push(`/details/${this.state.parkCode}`);
   }
 
   render() {
@@ -48,11 +54,10 @@ class AddPark extends Component {
       <ul className ="park-box">
       {data.description}
       </ul>
-      {data.images}
-      <Link to='/details/:id'>Detail</Link>
-      <div>
-      {data.id}
+      <div className='images-holder'>
+      <img width="250" height="250" alt='holder' src={data.images[0].url}/>
       </div>
+      <button onClick={this.getDetails}>Details</button>
       </div>
     ))
 
@@ -116,14 +121,14 @@ class AddPark extends Component {
     <option value="WI">Wisconsin</option>
     <option value="WY">Wyoming</option>
   </select>
-<br/>
-<button className="getWeatherButton">Search</button>
+  <br/>
+  <button className="searchButton">Search</button>
 </form>
-{parkResults}
-        <Link to='/dashboard'>Back</Link>
-        <Link to='/details/:id'>Detail</Link>
-
-      </div>
+<div className='park-list'>
+  {parkResults}
+  </div>
+    <Link to='/dashboard'>Back</Link>
+  </div>
     );
   }
 }

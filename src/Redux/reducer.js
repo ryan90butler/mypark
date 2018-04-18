@@ -1,4 +1,4 @@
-import {GET_USER} from './Actions/constraints';
+import {GET_USER,ADD_TO_MY_PARKS} from './Actions/constraints';
 import { combineReducers } from 'redux';
 
 function userInfo (state=[],action){
@@ -11,6 +11,8 @@ function userInfo (state=[],action){
     return state;
   }
 }
+
+// function
 
 const rootReducer = combineReducers({userInfo})
 

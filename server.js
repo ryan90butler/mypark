@@ -5,7 +5,7 @@ const massive = require('massive');
 const session = require('express-session');
 // const passport = require('passport');
 // const bcrypt = require('bcrypt');
-const {getPark, searchPark} = require('./server/NPSservice');
+const {getPark, parkDetail} = require('./server/NPService');
 
 require('dotenv').config();
 
@@ -34,23 +34,22 @@ massive(process.env.CONNECTION_STRING)
         saveUninitialized: false,
         rolling: true,
         resave: false,
-    }));
+}));
 
-    app.get('/api/parks',(req,res) => {
-        getPark(req.query.state)
+app.get('/api/parks',(req,res) => {
+    getPark(req.query.state)
+        .then(r => {
+        res.send(r).status(200);
+    })
+});
+app.get('/api/park-details/:id',(req,res) => {
+        parkDetail(req.params.id)
           .then(r => {
             res.send(r).status(200);
-          })
-      });
+    })
+});
 
-    app.get('/api/search-parks',(req,res) => {
-        searchPark(req.query.search)
-          .then(r => {
-            res.send(r).status(200);
-        })
-    });
-
-    app.post('/api/login', (req, res) => {
+app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
 
       req.db.users.findOne({ email, password })
@@ -66,34 +65,32 @@ massive(process.env.CONNECTION_STRING)
           });
     });
 
-    app.post('/api/register', (req, res) => {
+app.post('/api/register', (req, res) => {
       const { email, password, firstName, lastName, city, state, zip } = req.body;
 
     //  password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
-
-      req.db.users.insert({firstname:firstName, lastname:lastName, email, password,  city, state, zip })
-          .then(user => {
-            req.session.user = user.id
-              res.send({ success: true, message: 'logged in successfully' });
-          })
+        req.db.users.insert({firstname:firstName, lastname:lastName, email, password,  city, state, zip })
+        .then(user => {
+        req.session.user = user.id
+            res.send({ success: true, message: 'logged in successfully' });
+        })
           .catch(err =>{
             console.log(err)
-          }
-          );
-    });
+        }
+    );
+});
 
-    app.get(`/api/logout`, (req, res) =>{
+app.get(`/api/logout`, (req, res) =>{
         req.session.destroy();
         res.send({ success: true, message: 'Logged out successfully' });
-    })
+})
 
-    app.get('/api/user-data', (req, res) => {
+app.get('/api/user-data', (req, res) => {
         req.db.getUserInfo([req.session.user])
         .then(r => {
             res.send(r)
         })
-    });
-
+});
 
     function checkDb() {
         return (req, res, next) => {

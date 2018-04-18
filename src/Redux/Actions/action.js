@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USER} from '../Actions/constraints';
+import {GET_USER, ADD_TO_MY_PARKS} from '../Actions/constraints';
 
 export function getUser(){
   const payload = axios.get('/api/user-data');
@@ -9,10 +9,10 @@ export function getUser(){
 }
 }
 
-export function addToParks(){
+export function parkData(){
   const payload = axios.get('/api/park-data');
   return {
-    type: GET_USER,
+    type: ADD_TO_MY_PARKS,
     payload
 }
 }

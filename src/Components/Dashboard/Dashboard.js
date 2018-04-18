@@ -13,7 +13,7 @@ class Dashboard extends Component {
         isLoaded: false,
         firstName: ''
     }
-}
+  }
 
     componentDidMount(){
       this.props.getUser()
