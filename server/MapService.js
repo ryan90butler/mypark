@@ -13,5 +13,5 @@ function getMap(state){
 }
 
 module.exports ={
-  getMap,
+  getMap
 }

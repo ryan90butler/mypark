@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import {Link} from 'react-router-dom';
-import axios from 'axios'
+import AddToParkButton from '../Common/AddToParkButton';
+import axios from 'axios';
 import './Details.scss';
 
 class Details extends Component {
@@ -17,7 +18,7 @@ class Details extends Component {
   componentWillMount(){
     axios.get(`/api/park-details/${this.props.match.params.id}`)
     .then((r)=>{
-      console.log(r)
+      console.log(r.data.data)
       this.setState({
         isLoaded:true,
         parkDetails: r.data.data
@@ -43,12 +44,15 @@ class Details extends Component {
       </ul>
       <div className='images-holder'>
       {data.url}
+      <ul>
+      <img src={data.images[0].url} alt="nogo"/>
+      </ul>
+      <AddToParkButton parkid = {data.id}/>
       </div>
       <button onClick={this.getDetails}>Details</button>
       </div>
     ))
 
-    console.log(this.props.history)
     return (
       <div className="Details">
       <Header/>

@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import {connect} from 'react-redux';
 import {getUser} from '../../Redux/Actions/action';
 import { bindActionCreators} from 'redux';
+import axios from 'axios';
 import {Link} from 'react-router-dom';
 import './Dashboard.scss';
 
@@ -11,7 +12,8 @@ class Dashboard extends Component {
     super(props)
     this.state = {
         isLoaded: false,
-        firstName: ''
+        firstName: '',
+        myParks: []
     }
   }
 
@@ -22,7 +24,16 @@ class Dashboard extends Component {
             isLoaded:true,
             firstName: r.value.data[0].firstname
         });
-    })
+        })
+      .then(()=>{
+        axios.get(`/api/myparks`)
+        .then(r=>{
+          console.log(r.data)
+          this.setState({
+            myParks: r.data.data
+          })
+        })
+      })
     }
 
     render() {
@@ -30,11 +41,11 @@ class Dashboard extends Component {
       <div className="Dashboard">
       <Header/>
       This is the dashboard of {this.state.firstName}
-
       <br/>
-
-        Dashboard
-
+      <div>
+       {this.state.myParks}
+        </div>
+      <br/>
         <Link to='/addpark'>Search for Parks</Link>
       </div>
     );

@@ -34,21 +34,20 @@ massive(process.env.CONNECTION_STRING)
         saveUninitialized: false,
         rolling: true,
         resave: false,
-}));
+    }));
 
 app.get('/api/parks',(req,res) => {
     getPark(req.query.state)
         .then(r => {
         res.send(r).status(200);
     })
-});
+    });
 app.get('/api/park-details/:id',(req,res) => {
         parkDetail(req.params.id)
           .then(r => {
             res.send(r).status(200);
     })
-});
-
+    });
 app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
 
@@ -76,36 +75,59 @@ app.post('/api/register', (req, res) => {
         })
           .catch(err =>{
             console.log(err)
-        }
-    );
-});
-
+            }
+        );
+    });
 app.get(`/api/logout`, (req, res) =>{
         req.session.destroy();
         res.send({ success: true, message: 'Logged out successfully' });
-})
-
+    })
 app.get('/api/user-data', (req, res) => {
         req.db.getUserInfo([req.session.user])
         .then(r => {
-            res.send(r)
+        res.send(r)
         })
-});
+    });
+app.post(`/api/park-data`, (req,res) =>{
+        const userid = req.session.user;
+        const {parkid} = req.body;
+
+        req.db.user_parks.insert({parkid, userid})
+        .then((r)=>{
+            return  req.db.parks.find({parkid});
+        })
+        .then(r=>{
+            if(r.length <= 0){
+                return req.db.parks.insert({parkid})
+            }
+        })
+        .then(()=>{
+            res.send('Park Added')
+        })
+        .catch((err)=>{
+            throw err;
+        })
+    })
+app.get(`/api/myparks`, (req,res)=>{
+    const userid = req.session.user;
+   req.db.insert({userid})
+   .then(r =>{
+       res.send(r).status(200)
+   })
+})
 
     function checkDb() {
         return (req, res, next) => {
             const db = app.get('db');
-
-            if (db) {
+                if (db) {
                 req.db = db;
                 next();
-            }
-            else {
-                res.status(500).send({ message: 'this died' });
+                }
+        else {
+            res.status(500).send({ message: 'this died' });
             }
         };
-    }
-
+    };
 
 const port = process.env.PORT || 8080
 app.listen(port,()=>{

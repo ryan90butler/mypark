@@ -6,9 +6,9 @@ import { addToMyParks } from '../../Redux/Actions/action';
 class AddToMyParks extends Component{
 
   render(){
-    const { addToMyParks, parkID} = this.props
+    const { addToMyParks, parkid} = this.props
     return(
-      <button className="addToMyParks-Button" onClick={() => addToMyParks(parkID)}>ADD TO BASKET</button>
+      <button className="addToMyParks-Button" onClick={() => addToMyParks(parkid)}>ADD</button>
     )
   }
 }

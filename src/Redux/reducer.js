@@ -12,8 +12,18 @@ function userInfo (state=[],action){
   }
 }
 
-// function
+function myParkAdd (state='',action){
+  switch(action.type){
+    case`${ADD_TO_MY_PARKS}_FULFILLED`:
+    return state = action.payload.data;
+    case`${ADD_TO_MY_PARKS}_REJECTED`:
+    return ['Failed to work'];
+    default:
+    return state;
+  }
 
-const rootReducer = combineReducers({userInfo})
+}
+
+const rootReducer = combineReducers({userInfo, myParkAdd})
 
 export default rootReducer;

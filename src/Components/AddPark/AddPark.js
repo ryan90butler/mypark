@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import AddToParkButton from '../Common/AddToParkButton';
+import DetailButton from '../Common/DetailButton';
 import './AddPark.scss';
 
 class AddPark extends Component {
@@ -45,7 +47,6 @@ class AddPark extends Component {
   }
 
   render() {
-
     const parkResults = this.state.parkData.map((data, i)=>(
       <div className="park-container" key={data.id}>
      <ul className ="park-box">
@@ -58,6 +59,9 @@ class AddPark extends Component {
       <img width="250" height="250" alt='holder' src={data.images[0].url}/>
       </div>
       <button onClick={this.getDetails}>Details</button>
+      <DetailButton props = {data.parkcode}/>
+      <AddToParkButton parkid = {data.parkCode}/>
+
       </div>
     ))
 
