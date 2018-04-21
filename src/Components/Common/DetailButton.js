@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 
 class DetailButton extends Component{
   constructor(){
@@ -7,18 +8,16 @@ class DetailButton extends Component{
   }
 
   getDetails(){
-    console.log(this.props)
-    this.props.history.push(`/details/${this.props}`);
+    this.props.history.push(`/details/${this.props.parkid}`);
   }
 
   render(){
-    console.log(this.props)
     return(
-      <button className="addToBasket-Button" onClick={this.getDetails}>Get Details</button>
+      <button className="getDetails" onClick={()=>this.getDetails()}>Get Details</button>
     )
   }
 }
 
-export default DetailButton;
+export default withRouter(DetailButton);
 
 

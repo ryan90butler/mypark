@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import AddToParkButton from '../Common/AddToParkButton';
 import DetailButton from '../Common/DetailButton';
+import ReviewBox from '../Common/ReviewBox';
 import './AddPark.scss';
 
 class AddPark extends Component {
@@ -12,12 +13,10 @@ class AddPark extends Component {
       this.state={
         state: "",
         search: "",
-        parkData:[],
-        parkCode: ""
+        parkData:[]
       }
       this.handleChange = this.handleChange.bind(this)
       this.getPark = this.getPark.bind(this)
-      this.getDetails = this.getDetails.bind(this)
   }
 
   handleChange(e){
@@ -34,7 +33,6 @@ class AddPark extends Component {
     .then(r => {
       this.setState({
         parkData: r.data.data,
-        parkCode: r.data.data[0].parkCode
       })
     })
       .catch(error => {
@@ -42,11 +40,10 @@ class AddPark extends Component {
       })
   }
 
-  getDetails(){
-    this.props.history.push(`/details/${this.state.parkCode}`);
-  }
-
   render() {
+    if(!this.state.parkData){
+      return <div>Loading...</div>
+    }
     const parkResults = this.state.parkData.map((data, i)=>(
       <div className="park-container" key={data.id}>
      <ul className ="park-box">
@@ -56,14 +53,15 @@ class AddPark extends Component {
       {data.description}
       </ul>
       <div className='images-holder'>
-      <img width="250" height="250" alt='holder' src={data.images[0].url}/>
+      {/* <img width="250" height="250" alt='holder' src={data.images[0].url}/> */}
+      <ReviewBox/>
       </div>
-      <button onClick={this.getDetails}>Details</button>
-      <DetailButton props = {data.parkcode}/>
+      <DetailButton parkid = {data.parkCode}/>
       <AddToParkButton parkid = {data.parkCode}/>
 
       </div>
     ))
+
 
     return (
       <div className="AddPark">

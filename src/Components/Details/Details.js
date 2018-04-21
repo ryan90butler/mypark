@@ -18,7 +18,6 @@ class Details extends Component {
   componentWillMount(){
     axios.get(`/api/park-details/${this.props.match.params.id}`)
     .then((r)=>{
-      console.log(r.data.data)
       this.setState({
         isLoaded:true,
         parkDetails: r.data.data
@@ -27,9 +26,7 @@ class Details extends Component {
   }
 
   goBackButton(){
-    this.props.history.push({
-      pathname: '/addpark'
-    })
+    this.props.history.push('/addpark')
   }
 
   render() {
@@ -45,7 +42,7 @@ class Details extends Component {
       <div className='images-holder'>
       {data.url}
       <ul>
-      <img src={data.images[0].url} alt="nogo"/>
+      <img src={data.images[0].url} alt="no-go"/>
       </ul>
       <AddToParkButton parkid = {data.id}/>
       </div>

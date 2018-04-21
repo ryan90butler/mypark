@@ -74,7 +74,7 @@ app.post('/api/register', (req, res) => {
             res.send({ success: true, message: 'logged in successfully' });
         })
           .catch(err =>{
-            console.log(err)
+            throw err;
             }
         );
     });
@@ -108,15 +108,60 @@ app.post(`/api/park-data`, (req,res) =>{
             throw err;
         })
     })
-app.get(`/api/myparks`, (req,res)=>{
+app.get(`/api/myparks`,(req,res)=>{
     const userid = req.session.user;
-   req.db.insert({userid})
-   .then(r =>{
-       res.send(r).status(200)
+   req.db.fetchParks({userid})
+   .then(parks =>{
+    const promises = parks.map(park=>{
+      const parkId= park.parkid
+     return parkDetail(parkId)
+    })
+   return Promise.all(promises)
    })
+   .then(parksData =>{
+       res.send(parksData)
+   })
+
 })
 
-    function checkDb() {
+app.post(`/api/add-comment`,(req,res)=>{
+    const userId = req.session.user;
+    const parkid = req.body.parkCode;
+    const title = req.body.commentTitle;
+    const description = req.body.comments;
+
+    req.db.addComment({userId, parkid, title, description})
+        .then((r)=>{
+           return req.db.reviews.find({parkid})
+        })
+        .then(data => {
+            res.send(data)
+
+        })
+        .catch((err)=>{
+            throw err;
+        })
+
+})
+app.delete(`/api/remove/:id`,(req,res)=>{
+    req.db.removePark({parkId: req.params.id, userId: req.session.user})
+        .then(newProperties =>{
+            console.log('successfully removed')
+            const userid = req.session.user;
+            req.db.fetchParks({userid})
+            .then(parks =>{
+             const promises = parks.map(park=>{
+               const parkId= park.parkid
+              return parkDetail(parkId)
+             })
+            return Promise.all(promises)
+            })
+            .then(parksData =>{
+                res.send(parksData)
+            })
+        })
+})
+function checkDb() {
         return (req, res, next) => {
             const db = app.get('db');
                 if (db) {
