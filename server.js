@@ -46,7 +46,7 @@ app.get('/api/park-details/:id',(req,res) => {
         parkDetail(req.params.id)
           .then(r => {
             res.send(r).status(200);
-    })
+        })
     });
 app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
@@ -121,8 +121,13 @@ app.get(`/api/myparks`,(req,res)=>{
    .then(parksData =>{
        res.send(parksData)
    })
-
-})
+    })
+app.get(`/api/get-comments`, (req,res)=>{
+    req.db.reviews.find()
+        .then(allComments =>{
+            res.send(allComments)
+        })
+    })
 
 app.post(`/api/add-comment`,(req,res)=>{
     const userId = req.session.user;
@@ -142,7 +147,7 @@ app.post(`/api/add-comment`,(req,res)=>{
             throw err;
         })
 
-})
+    })
 app.delete(`/api/remove/:id`,(req,res)=>{
     req.db.removePark({parkId: req.params.id, userId: req.session.user})
         .then(newProperties =>{
@@ -160,7 +165,7 @@ app.delete(`/api/remove/:id`,(req,res)=>{
                 res.send(parksData)
             })
         })
-})
+    })
 function checkDb() {
         return (req, res, next) => {
             const db = app.get('db');

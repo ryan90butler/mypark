@@ -31,6 +31,7 @@ class AddPark extends Component {
     e.preventDefault();
     axios.get(`/api/parks?state=${this.state.state}`)
     .then(r => {
+      console.log(r.data.data)
       this.setState({
         parkData: r.data.data,
       })
@@ -49,6 +50,7 @@ class AddPark extends Component {
      <ul className ="park-box">
       {data.fullName}
       </ul>
+      {data.latLong}
       <ul className ="park-box">
       {data.description}
       </ul>
@@ -56,7 +58,7 @@ class AddPark extends Component {
       {/* <img width="250" height="250" alt='holder' src={data.images[0].url}/> */}
       <ReviewBox/>
       </div>
-      <DetailButton parkid = {data.parkCode}/>
+      <DetailButton latLong ={data.latLong} parkid = {data.parkCode}/>
       <AddToParkButton parkid = {data.parkCode}/>
 
       </div>

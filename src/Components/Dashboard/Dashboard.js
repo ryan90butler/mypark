@@ -19,7 +19,7 @@ class Dashboard extends Component {
     this.removePark = this.removePark.bind(this)
   }
 
-componentWillMount(){
+componentDidMount(){
       this.props.getUser()
       .then((r)=>{
         this.setState({

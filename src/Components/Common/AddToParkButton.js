@@ -8,7 +8,12 @@ class AddToMyParks extends Component{
   render(){
     const { addToMyParks, parkid} = this.props
     return(
-      <button className="addToMyParks-Button" onClick={() => addToMyParks(parkid)}>ADD</button>
+      <div>
+      {this.props.addToMyParks ?
+      <button className="addToMyParks-Button" onClick={() => addToMyParks(parkid)}>ADD</button>:
+      <div>added</div>
+      }
+      </div>
     )
   }
 }

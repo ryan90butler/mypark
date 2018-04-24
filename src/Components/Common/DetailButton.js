@@ -8,7 +8,12 @@ class DetailButton extends Component{
   }
 
   getDetails(){
-    this.props.history.push(`/details/${this.props.parkid}`);
+    console.log(this.props.latLong)
+    this.props.history.push({
+      pathname: `/details/${this.props.parkid}`,
+      state: { latLong: this.props.latLong }
+    }
+  );
   }
 
   render(){

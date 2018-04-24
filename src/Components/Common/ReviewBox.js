@@ -21,23 +21,18 @@ class ReviewBox extends Component{
     });
   }
 
-//   componentWillMount(){
-//     this.props.getUser()
-//     .then((r)=>{
-//       this.setState({
-//           isLoaded:true,
-//           firstName: r.value.data[0].firstname
-//       });
-//       })
-//     .then(()=>{
-//       axios.get(`/api/myparks`)
-//       .then(r=>{
-//       this.setState({
-//         myParks: r.data
-//       })
-//     })
-//   })
-// }
+  componentWillMount(){
+    axios.get(`/api/get-comments`,{
+      parkCode:this.allComments
+    })
+    .then(r=>{
+    // console.log(r)
+    // this.setState({
+    // myParks: r.data
+    //   })
+    })
+  }
+
 
   addComment(e){
     e.preventDefault();

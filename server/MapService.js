@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-function getMap(state){
+function getMap(latLong){
   let map = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&callback=initMap`;
   return axios.get(map)
     .then(r => {
