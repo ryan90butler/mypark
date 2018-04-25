@@ -92,10 +92,10 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {data.images[0].url ?
         <div>
       <img className="park-images" src={data.images[0].url} alt="no-go"/>
-      <img className="park-images" src={data.images[1].url} alt="no-go"/>
+      {/* <img className="park-images" src={data.images[1].url} alt="no-go"/>
       <img className="park-images" src={data.images[2].url} alt="no-go"/>
       <img className="park-images" src={data.images[3].url} alt="no-go"/>
-      <img className="park-images" src={data.images[4].url} alt="no-go"/>
+      <img className="park-images" src={data.images[4].url} alt="no-go"/> */}
       </div>: null
         }
       </ul>
