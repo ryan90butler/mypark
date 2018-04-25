@@ -5,7 +5,7 @@ const massive = require('massive');
 const session = require('express-session');
 // const passport = require('passport');
 const bcrypt = require('bcrypt');
-const {getPark, parkDetail} = require('./server/NPService');
+const {getPark, parkDetail, parkCampgrounds} = require('./server/NPService');
 const {getMap} = require('./server/MapService');
 
 require('dotenv').config();
@@ -62,7 +62,18 @@ app.post('/api/park-map',(req,res) => {
        .catch(err=>{
            throw err;
        })
-        });
+    });
+
+app.get(`/api/campgrounds/:id`, (req,res)=>{
+    parkCampgrounds(req.params.id)
+        .then(campgrounds => {
+            res.send(campgrounds).status(200)
+        })
+        .catch(err =>{
+            throw err;
+        })
+})
+
 app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
 

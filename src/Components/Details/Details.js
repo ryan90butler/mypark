@@ -15,7 +15,8 @@ class Details extends Component {
       parkDetails: [],
       parkComments: [],
       origin: '',
-      destination: ''
+      destination: '',
+      campground: []
   }
   this.goBackButton = this.goBackButton.bind(this)
   }
@@ -42,6 +43,13 @@ componentWillMount(){
     });
   })
 })
+axios.get(`/api/campgrounds/${this.props.match.params.id}`)
+  .then((r)=>{
+    console.log(r.data)
+    this.setState({
+      campground: r.data.data
+    })
+  })
   axios.get(`/api/get-comments/${this.props.match.params.id}`)
     .then((r)=>{
       this.setState({
@@ -63,6 +71,13 @@ componentWillMount(){
           </div>
         </div>
     ))
+
+    const campgrounds = this.state.campground.map((data,i)=>(
+      <div key={data.id}>
+        {data.name}
+        </div>
+    ))
+
     const parkDetails = this.state.parkDetails.map((data, i)=>(
       <div className="park-container" key={data.id}>
      <ul className ="park-box">
@@ -96,6 +111,7 @@ componentWillMount(){
         {parkDetails}
         <div>
           {parkComments}
+          {campgrounds}
           </div>
       <button onClick={this.goBackButton}>BackButton</button>
 

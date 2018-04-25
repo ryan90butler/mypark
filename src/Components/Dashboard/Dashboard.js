@@ -32,7 +32,6 @@ componentDidMount(){
       .then(()=>{
         axios.get(`/api/myparks`)
         .then(r=>{
-          console.log(r.data)
         this.setState({
           myParks: r.data
         })

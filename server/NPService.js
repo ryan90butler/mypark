@@ -21,8 +21,19 @@ function parkDetail(parkId){
     console.warn(error)
   })
 }
+function parkCampgrounds(parkId){
+  let nps = `https://developer.nps.gov/api/v1/campgrounds?parkCode=${parkId}&api_key=${process.env.NPS_API_KEY}`
+  return axios.get(nps)
+  .then(r => {
+    return r.data
+  })
+  .catch(error => {
+    console.warn(error)
+  })
+}
 
 module.exports ={
   getPark,
-  parkDetail
+  parkDetail,
+  parkCampgrounds
 }
