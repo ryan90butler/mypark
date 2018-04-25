@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import AddToParkButton from '../Common/AddToParkButton';
+import ReviewBox from '../Common/ReviewBox';
 import axios from 'axios';
 import {getUser, getParkDetails} from '../../Redux/Actions/action';
 import {connect} from 'react-redux';
@@ -19,39 +20,34 @@ class Details extends Component {
   this.goBackButton = this.goBackButton.bind(this)
   }
 
-  componentWillMount(){
-    this.props.getUser()
+componentWillMount(){
+  this.props.getUser()
     .then((response)=>{
+    this.setState({
+    origin: response.value.data[0].zip
+    });
+  this.props.getParkDetails(this.props.match.params.id)
+    .then(r =>{
+    this.setState({
+    destination: r.value.data.data[0].fullName,
+    parkDetails: r.value.data.data
+    })
+  axios.post(`/api/park-map`,{
+    destination: r.value.data.data[0].fullName,
+    origin: response.value.data[0].zip
+    })
+    .then((r)=>{
+    this.setState({
+    isLoaded:true,
+    });
+  })
+})
+  axios.get(`/api/get-comments/${this.props.match.params.id}`)
+    .then((r)=>{
       this.setState({
-          origin: response.value.data[0].zip
-      });
-      this.props.getParkDetails(this.props.match.params.id)
-        .then(r =>{
-          this.setState({
-            destination: r.value.data.data[0].fullName,
-            parkDetails: r.value.data.data
-          })
-          axios.post(`/api/park-map`,{
-            destination: r.value.data.data[0].fullName,
-            origin: response.value.data[0].zip
-            })
-            .then((r)=>{
-            this.setState({
-            isLoaded:true,
-            // parkDetails: r.data.data
-          });
-        })
+        parkComments: r.data
       })
-
-
-      axios.get(`/api/get-comments/${this.props.match.params.id}`)
-      .then((r)=>{
-        this.setState({
-          parkComments: r.data
-        })
-      })
-
-
+    })
     });
   }
 
@@ -90,15 +86,13 @@ class Details extends Component {
       </ul>
       </div>
       <AddToParkButton parkid = {data.parkCode}/>
+      <ReviewBox parkCode={data.parkCode}/>
       </div>
     ))
 
     return (
       <div className="Details">
       <Header/>
-
-      {this.state.origin}
-      {this.state.destination}
         {parkDetails}
         <div>
           {parkComments}

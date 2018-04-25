@@ -59,7 +59,7 @@ class ReviewBox extends Component{
         {data.description}
         </div>
         <div>
-        {data.created_on}
+        {/* {data.created_on} */}
           </div>
         </div>
         </div>

@@ -49,7 +49,6 @@ class AddPark extends Component {
      <ul className ="park-box">
       {data.fullName}
       </ul>
-      {data.latLong}
       <ul className ="park-box">
       {data.description}
       </ul>

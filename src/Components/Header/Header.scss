@@ -1,9 +1,29 @@
 .Header{
   background: black;
   color: white;
+  display: flex;
   height: 100px;
+  flex-direction: row;
+  justify-content: space-between;
   a{
     color: white;
     text-decoration: none;
   }
+}
+
+.header-logo {
+  margin-left: 80px;
+}
+
+.button-container {
+  display:  flex;
+  flex-direction:  column;
+  margin-right: 30px;
+  justify-content: space-evenly;
+  height:  100%;
+  align-content: space-evenly;
+}
+
+h1.header-text {
+  font-size: 44px;
 }

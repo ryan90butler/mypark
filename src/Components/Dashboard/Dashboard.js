@@ -5,7 +5,6 @@ import {getUser} from '../../Redux/Actions/action';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
 import DetailButton from '../Common/DetailButton';
-import {Link} from 'react-router-dom';
 import ReviewBox from '../Common/ReviewBox';
 import './Dashboard.scss';
 
@@ -15,9 +14,11 @@ class Dashboard extends Component {
     this.state = {
         isLoaded: false,
         firstName: '',
-        myParks: []
+        myParks: [],
+        myParkPictures: []
     }
-    this.removePark = this.removePark.bind(this)
+    this.removePark = this.removePark.bind(this);
+    this.searchForParks = this.searchForParks.bind(this);
   }
 
 componentDidMount(){
@@ -31,13 +32,16 @@ componentDidMount(){
       .then(()=>{
         axios.get(`/api/myparks`)
         .then(r=>{
+          console.log(r.data)
         this.setState({
           myParks: r.data
         })
       })
     })
   }
-
+  searchForParks(){
+    this.props.history.push('/addpark')
+  }
   removePark(parkId){
     axios.delete(`api/remove/`+ parkId)
       .then(r=>{
@@ -56,21 +60,33 @@ render() {
     <ul>
     {data.data[0].description}
     </ul>
+      <div>
+     <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>
+    {/* <img src={data.data[0].images[1].url} alt="noGo"/>
+    <img src={data.data[0].images[2].url} alt="noGo"/>
+    <img src={data.data[0].images[3].url} alt="noGo"/>
+     <img src={data.data[0].images[4].url} alt="noGo"/> */}
+     </div>
+    <ul>
+      </ul>
+
     <ReviewBox parkCode={data.data[0].parkCode}/>
     <DetailButton parkName ={data.data[0].fullName} parkid = {data.data[0].parkCode}/>
     <button onClick={()=> this.removePark(data.data[0].parkCode)}>Remove</button>
+    <hr width="100%"/>
     </div>
   ))
   return (
       <div className="Dashboard">
       <Header/>
-      This is the dashboard of {this.state.firstName}
+      <div className="dashboard-header-container">
+      <h2 className="dashboard-title">{this.state.firstName}'s Dashboard</h2>
+        <button className="search-button" onClick={this.searchForParks}>Search for Parks</button>
+      </div>
       <br/>
-      <div>
-        <Link to='/addpark'>Search for Parks</Link>
+      <div className="MyPark-list">
        {myParkData}
         </div>
-      <br/>
       </div>
     );
   }

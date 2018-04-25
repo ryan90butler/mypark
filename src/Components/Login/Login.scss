@@ -1,15 +1,32 @@
+body {
+  margin: 0px;
+}
+
 .login-register-container {
   border: 1px black solid;
-  margin-top: 20%;
-  width: 410px;
-  height: 500px;
+  width: 250px;
+  height: 250px;
   display: flex;
   justify-content: center;
+  background: whitesmoke;
+  box-shadow: 2px 3px 8px 2px black;
+  margin: 0px auto;
 }
 
 .login-page {
-  height:  100vh;
-  width: 100%;
   display: flex;
-  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  background-image: url("../../Assets/monumentValley.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.title-container {
+  margin-top: -300px;
+}
+
+.login-button {
+  margin-top: 20px;
 }

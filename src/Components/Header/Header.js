@@ -23,12 +23,13 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <Link to='/dashboard'>Header</Link>
-
+      <div className="header-logo">
+        <Link to='/dashboard'><h1 className="header-text">MyParks</h1></Link>
+        </div>
+        <div className="button-container">
         <Link className="header-link"to='/updateuser'>Update User</Link>
         <button className="header-link" onClick={this.sessionDestroy}>Logout</button>
-
-
+        </div>
       </div>
     );
   }

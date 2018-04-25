@@ -53,11 +53,11 @@ app.get('/api/park-details/:id',(req,res) => {
         })
     });
 app.post('/api/park-map',(req,res) => {
-    const {destination, origin} = req.body;
-    getMap({destination, origin})
+    const destination = req.body.destination;
+    const origin = req.body.origin;
+    getMap(destination, origin)
        .then(r=>{
            res.send(r)
-           console.log('done')
        })
        .catch(err=>{
            throw err;
