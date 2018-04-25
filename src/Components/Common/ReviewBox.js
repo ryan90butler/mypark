@@ -21,18 +21,17 @@ class ReviewBox extends Component{
     });
   }
 
-  componentWillMount(){
-    axios.get(`/api/get-comments`,{
-      parkCode:this.allComments
-    })
-    .then(r=>{
-    // console.log(r)
-    // this.setState({
-    // myParks: r.data
-    //   })
-    })
-  }
-
+  // componentWillMount(){
+  //   axios.get(`/api/get-comments`,{
+  //     parkCode:this.allComments
+  //   })
+  //   .then(r=>{
+  //   console.log(r)
+  //   this.setState({
+  //   myParks: r.data
+  //     })
+  //   })
+  // }
 
   addComment(e){
     e.preventDefault();
@@ -42,19 +41,26 @@ class ReviewBox extends Component{
       parkCode: this.props.parkCode
     })
     .then(r=>{
+      console.log(r.data)
      this.setState({
        allComments: r.data
      })
     })
   }
 
-
   render(){
     const reviews = this.state.allComments.map((data,i)=>(
       <div key={i}>
       <div>
+        <div>
         {data.title}
+        </div>
+        <div>
         {data.description}
+        </div>
+        <div>
+        {data.created_on}
+          </div>
         </div>
         </div>
     ))

@@ -4,8 +4,9 @@ const cors = require('cors');
 const massive = require('massive');
 const session = require('express-session');
 // const passport = require('passport');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const {getPark, parkDetail} = require('./server/NPService');
+const {getMap} = require('./server/MapService');
 
 require('dotenv').config();
 
@@ -47,7 +48,21 @@ app.get('/api/park-details/:id',(req,res) => {
           .then(r => {
             res.send(r).status(200);
         })
+        .catch(err=>{
+            throw err;
+        })
     });
+app.post('/api/park-map',(req,res) => {
+    const {destination, origin} = req.body;
+    getMap({destination, origin})
+       .then(r=>{
+           res.send(r)
+           console.log('done')
+       })
+       .catch(err=>{
+           throw err;
+       })
+        });
 app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
 
@@ -67,7 +82,7 @@ app.post('/api/login', (req, res) => {
 app.post('/api/register', (req, res) => {
       const { email, password, firstName, lastName, city, state, zip } = req.body;
 
-    //  password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
+     password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
         req.db.users.insert({firstname:firstName, lastname:lastName, email, password,  city, state, zip })
         .then(user => {
         req.session.user = user.id
@@ -78,6 +93,14 @@ app.post('/api/register', (req, res) => {
             }
         );
     });
+
+// app.put(`/api/update-user`,(req,res) =>{
+//     const { email, password, firstName, lastName, city, state, zip } = req.body;
+//     req.db.users.update({firstName, lastName, email, password,  city, state, zip})
+//     .then(updatedUser => {
+//         res.send(updatedUser)
+//     })
+// })
 app.get(`/api/logout`, (req, res) =>{
         req.session.destroy();
         res.send({ success: true, message: 'Logged out successfully' });
@@ -122,8 +145,9 @@ app.get(`/api/myparks`,(req,res)=>{
        res.send(parksData)
    })
     })
-app.get(`/api/get-comments`, (req,res)=>{
-    req.db.reviews.find()
+app.get(`/api/get-comments/:id`, (req,res)=>{
+   const parkid = req.params.id
+    req.db.reviews.find({parkid})
         .then(allComments =>{
             res.send(allComments)
         })

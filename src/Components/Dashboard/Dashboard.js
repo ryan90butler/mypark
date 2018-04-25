@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getUser} from '../../Redux/Actions/action';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
+import DetailButton from '../Common/DetailButton';
 import {Link} from 'react-router-dom';
 import ReviewBox from '../Common/ReviewBox';
 import './Dashboard.scss';
@@ -56,6 +57,7 @@ render() {
     {data.data[0].description}
     </ul>
     <ReviewBox parkCode={data.data[0].parkCode}/>
+    <DetailButton parkName ={data.data[0].fullName} parkid = {data.data[0].parkCode}/>
     <button onClick={()=> this.removePark(data.data[0].parkCode)}>Remove</button>
     </div>
   ))
