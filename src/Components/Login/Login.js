@@ -40,6 +40,11 @@ class Login extends Component {
   }
 
 render(){
+
+    const { email, password } = this.state;
+    const isEnabled =
+      email.length > 0 &&
+      password.length > 0
       return (
         <div className="login-page">
     <div className="title-container">
@@ -62,7 +67,7 @@ render(){
         <input className="login-input" name="password" value={this.state.password} onChange={this.handleChange} type="text"/>
     </div>
     <div className="login-button">
-    <button type="submit">Login</button>
+    <button disabled={!isEnabled} type="submit">Login</button>
     <br/>
     <button onClick={this.register}>Register</button>
     </div>

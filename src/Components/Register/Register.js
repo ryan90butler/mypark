@@ -44,6 +44,15 @@ class Register extends Component {
   }
 
 render(){
+    const { email, password, firstName, lastName, city, state, zip } = this.state;
+    const isEnabled =
+      email.length > 0 &&
+      password.length > 0 &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      city.length > 0 &&
+      state.length > 0 &&
+      zip.length > 0
       return (
         <div className="register-container">
         <div className="details">
@@ -82,7 +91,7 @@ render(){
             <input className="login-input" name="password" value={this.state.password} onChange={this.handleChange} type="text"/>
         <div className="register-buttons">
         <button className="sign-up-button">Register</button>
-        <button onClick={this.cancelRegister}>Cancel</button>
+        <button disabled={!isEnabled} onClick={this.cancelRegister}>Cancel</button>
         </div>
         </form>
         </div>

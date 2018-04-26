@@ -45,13 +45,13 @@ componentWillMount(){
 })
 axios.get(`/api/campgrounds/${this.props.match.params.id}`)
   .then((r)=>{
-    console.log(r.data)
     this.setState({
       campground: r.data.data
     })
   })
   axios.get(`/api/get-comments/${this.props.match.params.id}`)
     .then((r)=>{
+      console.log(r.data)
       this.setState({
         parkComments: r.data
       })
@@ -66,38 +66,70 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
   render() {
     const parkComments = this.state.parkComments.map((data, i)=>(
       <div key={data.id}>
+      <h3>Visitor Comments</h3>
         <div>
-          {data.title}
+          <h3>{data.title}</h3>
+          {data.description}
           </div>
         </div>
     ))
 
     const campgrounds = this.state.campground.map((data,i)=>(
       <div key={data.id}>
+      <ul>
         {data.name}
+        </ul>
+      <ul>
+        {data.description}
+        </ul>
+      <ul>
+        <h4>Amenities</h4>
+        {data.amenities.campStore ? <div>Camp Store</div>: null}
+        {data.amenities.laundry ? <div>Laundry</div>: null}
+        {data.amenities.potableWater ? <div>Drinking Water</div>: null}
+        {data.amenities.showers ? <div>Showers</div>: null}
+        {data.amenities.fireWoodForSale ? <div>Firewood</div>: null}
+        {data.amenities.toilets ? <div>Toilets</div>: null}
+        {data.amenities.cellPhoneReception ? <div>Cell Phone Reception</div>: null}
+        {data.amenities.directionsUrl ?<a href={data.directionsUrl} target="_blank">Get Driving Directions</a>: null}
+
+        </ul>
         </div>
     ))
 
     const parkDetails = this.state.parkDetails.map((data, i)=>(
       <div className="park-container" key={data.id}>
      <ul className ="park-box">
-      {data.fullName}
+      <h2>{data.fullName}</h2>
       </ul>
       <ul className ="park-box">
       {data.description}
       </ul>
-      {data.url}
+      <a href={data.url} target="_blank">Visit Official NPS site</a>
       <div className='images-holder'>
       <ul>
-        {data.images[0].url ?
         <div>
-      <img className="park-images" src={data.images[0].url} alt="no-go"/>
-      {/* <img className="park-images" src={data.images[1].url} alt="no-go"/>
-      <img className="park-images" src={data.images[2].url} alt="no-go"/>
-      <img className="park-images" src={data.images[3].url} alt="no-go"/>
-      <img className="park-images" src={data.images[4].url} alt="no-go"/> */}
-      </div>: null
-        }
+          {data.images[0].url ?
+      <img className="park-images" src={data.images[0].url} alt="no-go"/>:
+      null
+          }
+          {data.images[1].url ?
+      <img className="park-images" src={data.images[1].url} alt="no-go"/>:
+      null
+          }
+          {data.images[2].url ?
+      <img className="park-images" src={data.images[2].url} alt="no-go"/>:
+      null
+          }
+          {/* {data.images[3].url ?
+      <img className="park-images" src={data.images[3].url} alt="no-go"/>:
+     <div> null</div>
+          }
+          {data.images[4].url ?
+      <img className="park-images" src={data.images[4].url} alt="no-go"/>:
+      null
+          } */}
+      </div>
       </ul>
       </div>
       <AddToParkButton parkid = {data.parkCode}/>
@@ -111,6 +143,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {parkDetails}
         <div>
           {parkComments}
+          <h2>Campgrounds</h2>
           {campgrounds}
           </div>
       <button onClick={this.goBackButton}>BackButton</button>

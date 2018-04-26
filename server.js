@@ -72,7 +72,7 @@ app.get(`/api/campgrounds/:id`, (req,res)=>{
         .catch(err =>{
             throw err;
         })
-})
+    })
 
 app.post('/api/login', (req, res) => {
       const { email, password } = req.body;
@@ -105,13 +105,14 @@ app.post('/api/register', (req, res) => {
         );
     });
 
-// app.put(`/api/update-user`,(req,res) =>{
-//     const { email, password, firstName, lastName, city, state, zip } = req.body;
-//     req.db.users.update({firstName, lastName, email, password,  city, state, zip})
-//     .then(updatedUser => {
-//         res.send(updatedUser)
-//     })
-// })
+app.put(`/api/update-user`,(req,res) =>{
+    const { email, password, firstName, lastName, city, state, zip, id } = req.body;
+
+    req.db.updateUser({firstName, lastName, email, password,  city, state, zip, id})
+    .then(updatedUser => {
+        res.send(updatedUser)
+    })
+})
 app.get(`/api/logout`, (req, res) =>{
         req.session.destroy();
         res.send({ success: true, message: 'Logged out successfully' });
