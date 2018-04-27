@@ -16,16 +16,18 @@ class Details extends Component {
       parkComments: [],
       origin: '',
       destination: '',
-      campground: []
+      campground: [],
+      mapDirections: []
   }
   this.goBackButton = this.goBackButton.bind(this)
   }
 
 componentWillMount(){
   this.props.getUser()
-    .then((response)=>{
+    .then((r)=>{
     this.setState({
-    origin: response.value.data[0].zip
+    origin: r.value.data[0].zip,
+    userId: r.value.data[0].id
     });
   this.props.getParkDetails(this.props.match.params.id)
     .then(r =>{
@@ -35,10 +37,11 @@ componentWillMount(){
     })
   axios.post(`/api/park-map`,{
     destination: r.value.data.data[0].fullName,
-    origin: response.value.data[0].zip
+    origin: r.value.data.data[0].zip
     })
     .then((r)=>{
     this.setState({
+    mapDirections: r.data.routes[0].legs,
     isLoaded:true,
     });
   })
@@ -51,33 +54,55 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
   })
   axios.get(`/api/get-comments/${this.props.match.params.id}`)
     .then((r)=>{
-      console.log(r.data)
       this.setState({
         parkComments: r.data
       })
     })
     });
   }
-
   goBackButton(){
     this.props.history.push('/addpark')
   }
-
   render() {
-    const parkComments = this.state.parkComments.map((data, i)=>(
-      <div key={data.id}>
-      <h3>Visitor Comments</h3>
-        <div>
-          <h3>{data.title}</h3>
-          {data.description}
-          </div>
+    const distance = this.state.mapDirections.map((data, i)=>(
+      <div className="distance-container" key={i}>
+        {data.start_address}
+        <ul/>
+        {data.end_address}
+        <ul/>
+        {data.distance.text}
+        <ul/>
+        {data.duration.text}
         </div>
     ))
+
+    console.log(this.state.userId)
+
+    const parkComments = this.state.parkComments.map((data, i)=>{
+      const date = new Date(data.created_on);
+      const dateDisplay = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
+      return (
+      <div className="comments-container" key={data.id}>
+        <div className="individual-comments">
+          <h3>{data.title}</h3>
+          {data.description}
+
+          {dateDisplay}
+          <ul/>
+          {data.user_id}
+          <ul/>
+          {this.state.userId === data.user_id?
+           <div>you may delete</div> :null
+          }
+          </div>
+        </div>
+    );
+  })
 
     const campgrounds = this.state.campground.map((data,i)=>(
       <div key={data.id}>
       <ul>
-        {data.name}
+        <h3>{data.name}</h3>
         </ul>
       <ul>
         {data.description}
@@ -91,14 +116,12 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {data.amenities.fireWoodForSale ? <div>Firewood</div>: null}
         {data.amenities.toilets ? <div>Toilets</div>: null}
         {data.amenities.cellPhoneReception ? <div>Cell Phone Reception</div>: null}
-        {data.amenities.directionsUrl ?<a href={data.directionsUrl} target="_blank">Get Driving Directions</a>: null}
-
         </ul>
         </div>
     ))
 
     const parkDetails = this.state.parkDetails.map((data, i)=>(
-      <div className="park-container" key={data.id}>
+      <div key={data.id}>
      <ul className ="park-box">
       <h2>{data.fullName}</h2>
       </ul>
@@ -109,26 +132,25 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       <div className='images-holder'>
       <ul>
         <div>
-          {data.images[0].url ?
+         {data.images[0] ?
       <img className="park-images" src={data.images[0].url} alt="no-go"/>:
       null
           }
-          {data.images[1].url ?
+          {data.images[1] ?
       <img className="park-images" src={data.images[1].url} alt="no-go"/>:
       null
           }
-          {data.images[2].url ?
+          {data.images[2] ?
       <img className="park-images" src={data.images[2].url} alt="no-go"/>:
       null
           }
-          {/* {data.images[3].url ?
-      <img className="park-images" src={data.images[3].url} alt="no-go"/>:
-     <div> null</div>
+          {data.images[3] ?
+      <img className="park-images" src={data.images[3].url} alt="no-go"/>: null
           }
-          {data.images[4].url ?
+          {data.images[4] ?
       <img className="park-images" src={data.images[4].url} alt="no-go"/>:
       null
-          } */}
+          }
       </div>
       </ul>
       </div>
@@ -141,10 +163,16 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       <div className="Details">
       <Header/>
         {parkDetails}
+        {distance}
         <div>
-          {parkComments}
-          <h2>Campgrounds</h2>
+          <div>
+          {parkComments ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null}
+          </div>
+          <div>
+          {campgrounds ? <div className="campground-container"><h2>Campgrounds</h2>
           {campgrounds}
+          </div>:null}
+          </div>
           </div>
       <button onClick={this.goBackButton}>BackButton</button>
 

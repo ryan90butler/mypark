@@ -3,10 +3,35 @@
   flex-direction:  row;
   overflow:  scroll;
   height: 430px;
-  width: 80%;
+  width: 90%;
 }
 
 img.park-images {
-  height: 430px;
+  height: 450px;
   width: 80%;
+}
+
+.comment-container {
+  background: whitesmoke;
+  padding-bottom: 20px;
+}
+
+.park-container {
+  display:  flex;
+  flex-direction:  column;
+  width: 90%;
+}
+
+.individual-comments {
+  display: grid;
+  width: 400px;
+  margin: auto;
+  border:  1px solid;
+}
+
+.campground-container {
+  display:  flex;
+  flex-direction:  column;
+  width: 80%;
+  margin:  auto;
 }

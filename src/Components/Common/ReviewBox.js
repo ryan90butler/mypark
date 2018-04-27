@@ -7,10 +7,12 @@ class ReviewBox extends Component{
     this.state = {
       commentTitle: '',
       comments: '',
-      allComments: []
+      allComments: [],
+      addReview: false
     }
-    this.addComment = this.addComment.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.addComment = this.addComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.allowComment =  this.allowComment.bind(this);
   }
 
   handleChange(e){
@@ -43,13 +45,22 @@ class ReviewBox extends Component{
     .then(r=>{
       console.log(r.data)
      this.setState({
+       addReview: true,
        allComments: r.data
      })
     })
   }
+  allowComment(){
+    this.setState({
+      addReview: true
+    })
+  }
 
   render(){
-    const reviews = this.state.allComments.map((data,i)=>(
+    const reviews = this.state.allComments.map((data,i)=>{
+      const date = new Date(data.created_on);
+      const dateDisplay = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
+      return (
       <div key={i}>
       <div>
         <div>
@@ -59,19 +70,26 @@ class ReviewBox extends Component{
         {data.description}
         </div>
         <div>
-        {/* {data.created_on} */}
+        {dateDisplay}
           </div>
         </div>
         </div>
-    ))
+    );
+  })
     return(
       <div className="comment-box">
         <div>
+          {this.state.addReview ?
           <form onSubmit={this.addComment}>
-          <button className="comment-button"onClick={this.addComment}>Add Comment</button>
+
+          <button className="comment-button"onClick={this.addComment}>Submit Comment</button>
+
           <input name="commentTitle" className="input-field"type="text" value={this.state.commentTitle} placeholder="Title" onChange={this.handleChange}/>
+
           <input name="comments" className="input-field"type="text" value={this.state.comments} placeholder="Enter Personal Experiences" onChange={this.handleChange}/>
-          </form>
+
+          </form>: <button onClick={this.allowComment}>Comment</button>}
+
           </div>
           {reviews}
         </div>

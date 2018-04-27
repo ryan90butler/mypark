@@ -1,17 +1,19 @@
-const axios = require('axios');
+const axios = require("axios");
 
-function getMap(origin, destination){
-const start = origin;
-let map= `https://maps.googleapis.com/maps/api/directions/json?origin=${start}&destination=${destination}&key=${process.env.GOOGLE_API_KEY}`
+function getMap(destination, origin) {
+  let map = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination.replace(/\s/g, '+')}&key=${
+    process.env.GOOGLE_MAPS_API_KEY
+  }`;
 
-  return axios.get(map)
+  return axios
+    .get(map)
     .then(r => {
-      return r.data
+      return r.data;
     })
     .catch(error => {
-      console.warn(error)
-    })
+      console.warn(error);
+    });
 }
-module.exports ={
+module.exports = {
   getMap
-}
+};

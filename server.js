@@ -5,10 +5,11 @@ const massive = require('massive');
 const session = require('express-session');
 // const passport = require('passport');
 const bcrypt = require('bcrypt');
+
+require('dotenv').config({ path: __dirname + '/.env'});
+
 const {getPark, parkDetail, parkCampgrounds} = require('./server/NPService');
 const {getMap} = require('./server/MapService');
-
-require('dotenv').config();
 
 const app = express();
 
@@ -112,7 +113,7 @@ app.put(`/api/update-user`,(req,res) =>{
     .then(updatedUser => {
         res.send(updatedUser)
     })
-})
+    })
 app.get(`/api/logout`, (req, res) =>{
         req.session.destroy();
         res.send({ success: true, message: 'Logged out successfully' });
@@ -159,9 +160,12 @@ app.get(`/api/myparks`,(req,res)=>{
     })
 app.get(`/api/get-comments/:id`, (req,res)=>{
    const parkid = req.params.id
-    req.db.reviews.find({parkid})
+    req.db.getComments({parkid})
         .then(allComments =>{
             res.send(allComments)
+        })
+        .catch(err=>{
+            throw err;
         })
     })
 
@@ -187,7 +191,6 @@ app.post(`/api/add-comment`,(req,res)=>{
 app.delete(`/api/remove/:id`,(req,res)=>{
     req.db.removePark({parkId: req.params.id, userId: req.session.user})
         .then(newProperties =>{
-            console.log('successfully removed')
             const userid = req.session.user;
             req.db.fetchParks({userid})
             .then(parks =>{

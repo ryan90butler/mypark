@@ -52,17 +52,25 @@ class AddPark extends Component {
       <ul className ="park-box">
       {data.description}
       </ul>
-      <div className='images-holder'>
-      {/* {data.images[0].url ?
+      <div className='add-park-images-holder'>
+      {data.images[0] ?
       <div>
       <img width="250" height="250" alt='holder' src={data.images[0].url}/>
-      </div>:
-      <div>null</div>
-      } */}
-      <ReviewBox/>
+      </div>:null}
+      {data.images[1] ?
+      <div>
+      <img width="250" height="250" alt='holder' src={data.images[1].url}/>
+      </div>:null}
+      {data.images[2] ?
+      <div>
+      <img width="250" height="250" alt='holder' src={data.images[2].url}/>
+      </div>:null}
       </div>
+      <div className="park-buttons">
+      <ReviewBox/>
       <DetailButton parkName ={data.fullName} parkid = {data.parkCode}/>
       <AddToParkButton parkid = {data.parkCode}/>
+      </div>
 
       </div>
     ))

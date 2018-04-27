@@ -1,10 +1,17 @@
+
 .park-list {
   overflow: scroll;
   height: 70vh;
+  width: 90%;
+  margin: auto;
 }
-.park-list {
-  overflow:  scroll;
-  height:  70vh;
-  width: 70%;
-  margin:  auto;
+
+.add-park-images-holder{
+display: flex;
+flex-direction: row;
+overflow: scroll;
+height: auto;
+margin: auto;
+width: 90%;
+justify-content: space-around;
 }
