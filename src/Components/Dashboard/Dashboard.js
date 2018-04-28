@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import {connect} from 'react-redux';
-import {getUser} from '../../Redux/Actions/action';
+import {getUser, addToMyParks} from '../../Redux/Actions/action';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
 import DetailButton from '../Common/DetailButton';
@@ -59,17 +59,20 @@ render() {
     </ul>
       <div>{data.data[0].images[0] ?
      <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>:null}
-    {/* <img src={data.data[0].images[1].url} alt="noGo"/>
-    <img src={data.data[0].images[2].url} alt="noGo"/>
-    <img src={data.data[0].images[3].url} alt="noGo"/>
-     <img src={data.data[0].images[4].url} alt="noGo"/> */}
+     {data.data[0].images[1] ?
+     <img className="myParkImages"src={data.data[0].images[1].url} alt="noGo"/>:null}
+      <div>{data.data[0].images[2] ?
+     <img className="myParkImages"src={data.data[0].images[2].url} alt="noGo"/>:null}
+     {data.data[0].images[3] ?
+     <img className="myParkImages"src={data.data[0].images[3].url} alt="noGo"/>:null}
+     </div>
      </div>
     <ul>
       </ul>
 
     <ReviewBox parkCode={data.data[0].parkCode}/>
     <DetailButton parkName ={data.data[0].fullName} parkid = {data.data[0].parkCode}/>
-    <button onClick={()=> this.removePark(data.data[0].parkCode)}>Remove</button>
+    <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this park?')) this.removePark(data.data[0].parkCode)}}>Remove</button>
     <hr width="100%"/>
     </div>
   ))

@@ -90,8 +90,8 @@ render(){
             <br/>
             <input className="login-input" name="password" value={this.state.password} onChange={this.handleChange} type="text"/>
         <div className="register-buttons">
-        <button className="sign-up-button">Register</button>
-        <button disabled={!isEnabled} onClick={this.cancelRegister}>Cancel</button>
+        <button disabled={!isEnabled}className="sign-up-button">Register</button>
+        <button onClick={this.cancelRegister}>Cancel</button>
         </div>
         </form>
         </div>

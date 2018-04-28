@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USER, ADD_TO_MY_PARKS, GET_DETAILS} from '../Actions/constraints';
+import {GET_USER, ADD_TO_MY_PARKS, GET_DETAILS, ADD_COMMENTS, GET_COMMENTS, REMOVE_COMMENT} from '../Actions/constraints';
 
 export function getUser(){
     const payload = axios.get('/api/user-data');
@@ -20,6 +20,30 @@ export function getParkDetails(parkid){
     const payload = axios.get(`/api/park-details/${parkid}`, {parkid});
     return {
       type: GET_DETAILS,
+      payload
+    }
+  }
+
+  export function addParkComments(comments, commentTitle, parkCode){
+    const payload = axios.post(`/api/add-comment`,{
+      comments, commentTitle, parkCode
+    })
+    return{
+      type: ADD_COMMENTS,
+      payload
+    }
+  }
+  export function getParkComments(id){
+    const payload = axios.get(`/api/get-comments/`+ id)
+    return{
+      type: GET_COMMENTS,
+      payload
+    }
+  }
+  export function removeComments(id, parkid){
+   const payload = axios.delete(`/api/remove-comment/`+ id,{data: {park: parkid}})
+    return{
+      type: REMOVE_COMMENT,
       payload
     }
   }

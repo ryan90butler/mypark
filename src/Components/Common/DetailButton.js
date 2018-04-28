@@ -18,5 +18,3 @@ class DetailButton extends Component{
 }
 
 export default withRouter(DetailButton);
-
-

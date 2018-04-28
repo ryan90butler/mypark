@@ -14,6 +14,9 @@ class AddToMyParks extends Component{
     axios.delete(`api/remove/`+ parkId)
       .then(r=>{
         console.log(r.data)
+        this.setState({
+          parkId:r.data
+        })
       })
   }
 
@@ -21,12 +24,13 @@ class AddToMyParks extends Component{
 
   render(){
     const { addToMyParks, parkid} = this.props
+    console.log(this.props.parkid)
     return(
       <div>
-      {this.props.myParkAdd ?
-      <button className="addToMyParks-Button">Added</button>:
-      <button className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>Add</button>
-      }
+      {/* {this.props.myParkAdd ?
+      <button className="addToMyParks-Button">Added</button>: */}
+      <button className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>This is my Add Button</button>
+      {/* } */}
       </div>
     )
   }

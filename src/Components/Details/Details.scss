@@ -30,8 +30,13 @@ img.park-images {
 }
 
 .campground-container {
-  display:  flex;
-  flex-direction:  column;
-  width: 80%;
-  margin:  auto;
+  border: 1px black solid;
+  display: flex;
+  height: auto;
+  background: whitesmoke;
+  overflow: scroll;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 20px;
 }

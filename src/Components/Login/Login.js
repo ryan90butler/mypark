@@ -63,7 +63,7 @@ render(){
     <div>
         <label>Password</label>
         <br/>
-        <input className="login-input" name="password" value={this.state.password} onChange={this.handleChange} type="text"/>
+        <input className="login-input" name="password" value={this.state.password} onChange={this.handleChange} type="password"/>
     </div>
     <div className="login-button">
     <button disabled={!isEnabled} type="submit">Login</button>

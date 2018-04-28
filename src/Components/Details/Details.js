@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import AddToParkButton from '../Common/AddToParkButton';
 import ReviewBox from '../Common/ReviewBox';
 import axios from 'axios';
-import {getUser, getParkDetails} from '../../Redux/Actions/action';
+import {getUser, getParkDetails, removeComments, getParkComments} from '../../Redux/Actions/action';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import './Details.scss';
@@ -13,14 +13,14 @@ class Details extends Component {
     super(props)
     this.state = {
       parkDetails: [],
-      parkComments: [],
       origin: '',
       destination: '',
       campground: [],
       mapDirections: []
       }
   this.goBackButton = this.goBackButton.bind(this);
-  this.removeComment = this.removeComment.bind(this);
+  this.deleteComment = this.deleteComment.bind(this);
+  this.addComment = this.addComment.bind(this);
   }
 
 componentWillMount(){
@@ -52,21 +52,20 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       campground: r.data.data
     })
   })
-  axios.get(`/api/get-comments/${this.props.match.params.id}`)
-    .then((r)=>{
-      this.setState({
-        parkComments: r.data
-      })
-    })
+  this.props.getParkComments(this.props.match.params.id)
     });
   }
 
-  removeComment(id){
-    axios.delete(`/api/remove-comment/`+ id)
-    .then(r =>{
-      this.setState({
-        parkComments: r.data
-      })
+  deleteComment(id, parkid){
+    this.props.removeComments(id, parkid)
+  }
+
+  addComment(e){
+    e.preventDefault();
+    this.props.addParkComments({
+      comments: this.state.comments,
+      commentTitle: this.state.commentTitle,
+      parkCode: this.props.parkCode
     })
   }
 
@@ -86,21 +85,23 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {data.duration.text}
         </div>
     ))
-    const parkComments = this.state.parkComments.map((data, i)=>{
+    const parkComments = this.props.parkComments.map((data, i)=>{
       const date = new Date(data.created_on);
       const dateDisplay = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
       return (
       <div className="comments-container" key={data.id}>
         <div className="individual-comments">
-          <h3>{data.title}</h3>
-          {data.description}
           {dateDisplay}
-          {data.id}
+          <ul/>
+          <h3>{data.title}</h3>
+
+          {data.description}
+          <ul/>
           {data.userFirstName}
           {data.userLastName}
           <ul/>
           {this.state.userId === data.user_id?
-          <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this item?')) this.removeComment(data.id)}}>you may delete</button> :null
+          <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this comment?')) this.deleteComment(data.id, data.parkid)}}>you may delete</button> :null
           }
           </div>
         </div>
@@ -173,15 +174,13 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {parkDetails}
         {distance}
         <div>
-
           <div>
-          {campgrounds ? <div className="campground-container"><h2>Campgrounds</h2>
+          {campgrounds.length ? <div className="campground-container"><h2>Campgrounds</h2>
           {campgrounds}
           </div>:null}
           </div>
           <div>
-          {/* {parkComments ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null} */}
-          {parkComments}
+          {parkComments.length ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null}
           </div>
           </div>
       <button onClick={this.goBackButton}>BackButton</button>
@@ -189,12 +188,12 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
     );
   }
 }
-function mapStateToProps({userInfo, getParkDetails}){
-  return {userInfo, getParkDetails}
+function mapStateToProps({userInfo, parkComments}){
+  return {userInfo, parkComments}
   }
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators({getUser, getParkDetails}, dispatch);
+	return bindActionCreators({getUser,getParkComments, removeComments, getParkDetails}, dispatch);
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details);

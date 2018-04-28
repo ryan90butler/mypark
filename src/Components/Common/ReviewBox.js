@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {addParkComments, getParkComments} from '../../Redux/Actions/action';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class ReviewBox extends Component{
   constructor(){
@@ -7,7 +9,6 @@ class ReviewBox extends Component{
     this.state = {
       commentTitle: '',
       comments: '',
-      allComments: [],
       addReview: false
     }
     this.addComment = this.addComment.bind(this);
@@ -23,29 +24,15 @@ class ReviewBox extends Component{
     });
   }
 
-  // componentWillMount(){
-  //   axios.get(`/api/get-comments`,{
-  //     parkCode:this.allComments
-  //   })
-  //   .then(r=>{
-  //   console.log(r)
-  //   this.setState({
-  //   myParks: r.data
-  //     })
-  //   })
-  // }
-
   addComment(e){
     e.preventDefault();
-    axios.post(`/api/add-comment`,{
+    this.props.addParkComments({
       comments: this.state.comments,
       commentTitle: this.state.commentTitle,
-      parkCode: this.props.parkCode
-    })
-    .then(r=>{
+      parkCode: this.props.parkCode})
+        .then(r=>{
      this.setState({
-       addReview: true,
-       allComments: r.data,
+       addReview: false,
        commentTitle: '',
        comments: '',
      })
@@ -58,25 +45,6 @@ class ReviewBox extends Component{
   }
 
   render(){
-    const reviews = this.state.allComments.map((data,i)=>{
-      const date = new Date(data.created_on);
-      const dateDisplay = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
-      return (
-      <div key={i}>
-      <div>
-        <div>
-        {data.title}
-        </div>
-        <div>
-        {data.description}
-        </div>
-        <div>
-        {dateDisplay}
-          </div>
-        </div>
-        </div>
-    );
-  })
     return(
       <div className="comment-box">
         <div>
@@ -92,10 +60,17 @@ class ReviewBox extends Component{
           </form>: <button onClick={this.allowComment}>Comment</button>}
 
           </div>
-          {reviews}
         </div>
     )
   }
 }
 
-export default ReviewBox;
+function mapStateToProps({userInfo}){
+  return {userInfo}
+  }
+
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({addParkComments, getParkComments}, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewBox);

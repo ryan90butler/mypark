@@ -138,12 +138,15 @@ app.post(`/api/park-data`, (req,res) =>{
             }
         })
         .then(()=>{
-            res.send('Park Added')
+           return req.db.fetchParks({userid})
+            .then(parks =>{
+            res.send(parks)
         })
         .catch((err)=>{
             throw err;
         })
     })
+})
 app.get(`/api/myparks`,(req,res)=>{
     const userid = req.session.user;
    req.db.fetchParks({userid})
@@ -171,9 +174,9 @@ app.get(`/api/get-comments/:id`, (req,res)=>{
 
 app.post(`/api/add-comment`,(req,res)=>{
     const userId = req.session.user;
-    const parkid = req.body.parkCode;
-    const title = req.body.commentTitle;
-    const description = req.body.comments;
+    const parkid = req.body.comments.parkCode;
+    const title = req.body.comments.commentTitle;
+    const description = req.body.comments.comments;
 
     req.db.addComment({userId, parkid, title, description})
         .then((r)=>{
@@ -191,7 +194,7 @@ app.post(`/api/add-comment`,(req,res)=>{
 app.delete(`/api/remove-comment/:id`, (req, res)=>{
     req.db.deleteComment(req.params.id)
     .then((r)=>{
-        const parkid = req.params.id
+        const parkid = req.body.park
         req.db.getComments({parkid})
             .then(allComments =>{
                 res.send(allComments)
@@ -200,7 +203,6 @@ app.delete(`/api/remove-comment/:id`, (req, res)=>{
                 throw err;
             })
     })
-
 })
 app.delete(`/api/remove/:id`,(req,res)=>{
     req.db.removePark({parkId: req.params.id, userId: req.session.user})
@@ -238,4 +240,4 @@ function checkDb() {
 const port = process.env.PORT || 8080
 app.listen(port,()=>{
   console.log(`Server listening on port ${port}`)
-} )
+} );
