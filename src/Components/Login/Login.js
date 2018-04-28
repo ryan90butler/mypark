@@ -14,7 +14,6 @@ class Login extends Component {
   }
 
   register(){
-      console.log('register');
       this.props.history.push('/new-user');
   }
 

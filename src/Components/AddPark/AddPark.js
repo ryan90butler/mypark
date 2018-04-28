@@ -71,11 +71,8 @@ class AddPark extends Component {
       <DetailButton parkName ={data.fullName} parkid = {data.parkCode}/>
       <AddToParkButton parkid = {data.parkCode}/>
       </div>
-
       </div>
     ))
-
-
     return (
       <div className="AddPark">
       <Header/>

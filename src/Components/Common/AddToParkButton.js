@@ -10,7 +10,6 @@ class AddToMyParks extends Component{
     this.removePark = this.removePark.bind(this)
   }
 
-
   removePark(parkId){
     axios.delete(`api/remove/`+ parkId)
       .then(r=>{
@@ -18,13 +17,15 @@ class AddToMyParks extends Component{
       })
   }
 
+  //individualize each parkid on add?
+
   render(){
     const { addToMyParks, parkid} = this.props
     return(
       <div>
       {this.props.myParkAdd ?
-      <button className="addToMyParks-Button" onClick={() => this.removePark(parkid)}>Remove</button>:
-      <button className="addToMyParks-Button" onClick={() => addToMyParks(parkid)}>Add</button>
+      <button className="addToMyParks-Button">Added</button>:
+      <button className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>Add</button>
       }
       </div>
     )

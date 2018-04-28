@@ -188,6 +188,20 @@ app.post(`/api/add-comment`,(req,res)=>{
         })
 
     })
+app.delete(`/api/remove-comment/:id`, (req, res)=>{
+    req.db.deleteComment(req.params.id)
+    .then((r)=>{
+        const parkid = req.params.id
+        req.db.getComments({parkid})
+            .then(allComments =>{
+                res.send(allComments)
+            })
+            .catch(err=>{
+                throw err;
+            })
+    })
+
+})
 app.delete(`/api/remove/:id`,(req,res)=>{
     req.db.removePark({parkId: req.params.id, userId: req.session.user})
         .then(newProperties =>{
@@ -202,6 +216,9 @@ app.delete(`/api/remove/:id`,(req,res)=>{
             })
             .then(parksData =>{
                 res.send(parksData)
+            })
+            .catch(err=>{
+                throw err;
             })
         })
     })

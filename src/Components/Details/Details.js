@@ -18,31 +18,31 @@ class Details extends Component {
       destination: '',
       campground: [],
       mapDirections: []
-  }
-  this.goBackButton = this.goBackButton.bind(this)
+      }
+  this.goBackButton = this.goBackButton.bind(this);
+  this.removeComment = this.removeComment.bind(this);
   }
 
 componentWillMount(){
   this.props.getUser()
-    .then((r)=>{
+    .then((response)=>{
     this.setState({
-    origin: r.value.data[0].zip,
-    userId: r.value.data[0].id
+    origin: response.value.data[0].zip,
+    userId: response.value.data[0].id
     });
   this.props.getParkDetails(this.props.match.params.id)
-    .then(r =>{
+    .then((r) =>{
     this.setState({
     destination: r.value.data.data[0].fullName,
     parkDetails: r.value.data.data
     })
   axios.post(`/api/park-map`,{
     destination: r.value.data.data[0].fullName,
-    origin: r.value.data.data[0].zip
+    origin: response.value.data[0].zip
     })
     .then((r)=>{
     this.setState({
     mapDirections: r.data.routes[0].legs,
-    isLoaded:true,
     });
   })
 })
@@ -60,9 +60,20 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
     })
     });
   }
+
+  removeComment(id){
+    axios.delete(`/api/remove-comment/`+ id)
+    .then(r =>{
+      this.setState({
+        parkComments: r.data
+      })
+    })
+  }
+
   goBackButton(){
     this.props.history.push('/addpark')
   }
+
   render() {
     const distance = this.state.mapDirections.map((data, i)=>(
       <div className="distance-container" key={i}>
@@ -75,9 +86,6 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {data.duration.text}
         </div>
     ))
-
-    console.log(this.state.userId)
-
     const parkComments = this.state.parkComments.map((data, i)=>{
       const date = new Date(data.created_on);
       const dateDisplay = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`
@@ -86,13 +94,13 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         <div className="individual-comments">
           <h3>{data.title}</h3>
           {data.description}
-
           {dateDisplay}
-          <ul/>
-          {data.user_id}
+          {data.id}
+          {data.userFirstName}
+          {data.userLastName}
           <ul/>
           {this.state.userId === data.user_id?
-           <div>you may delete</div> :null
+          <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this item?')) this.removeComment(data.id)}}>you may delete</button> :null
           }
           </div>
         </div>
@@ -165,17 +173,18 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
         {parkDetails}
         {distance}
         <div>
-          <div>
-          {parkComments ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null}
-          </div>
+
           <div>
           {campgrounds ? <div className="campground-container"><h2>Campgrounds</h2>
           {campgrounds}
           </div>:null}
           </div>
+          <div>
+          {/* {parkComments ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null} */}
+          {parkComments}
+          </div>
           </div>
       <button onClick={this.goBackButton}>BackButton</button>
-
       </div>
     );
   }

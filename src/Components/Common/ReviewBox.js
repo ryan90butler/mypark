@@ -43,10 +43,11 @@ class ReviewBox extends Component{
       parkCode: this.props.parkCode
     })
     .then(r=>{
-      console.log(r.data)
      this.setState({
        addReview: true,
-       allComments: r.data
+       allComments: r.data,
+       commentTitle: '',
+       comments: '',
      })
     })
   }

@@ -12,7 +12,6 @@ class Dashboard extends Component {
   constructor(props){
     super(props)
     this.state = {
-        isLoaded: false,
         firstName: '',
         myParks: [],
         myParkPictures: []
@@ -25,7 +24,6 @@ componentDidMount(){
       this.props.getUser()
       .then((r)=>{
         this.setState({
-            isLoaded:true,
             firstName: r.value.data[0].firstname
         });
         })
@@ -59,8 +57,8 @@ render() {
     <ul>
     {data.data[0].description}
     </ul>
-      <div>
-     <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>
+      <div>{data.data[0].images[0] ?
+     <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>:null}
     {/* <img src={data.data[0].images[1].url} alt="noGo"/>
     <img src={data.data[0].images[2].url} alt="noGo"/>
     <img src={data.data[0].images[3].url} alt="noGo"/>
