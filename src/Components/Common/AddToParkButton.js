@@ -10,12 +10,12 @@ class AddToMyParks extends Component{
     this.removePark = this.removePark.bind(this)
   }
 
-  // componentDidMount(){
-  //   this.props.getParkId()
-  //   .then(r=>{
-  //     console.log(r)
-  //   })
-  // }
+  componentWillMount(){
+    this.props.getParkId()
+    .then(r=>{
+      console.log(r)
+    })
+  }
 
   removePark(parkId){
     axios.delete(`api/remove/`+ parkId)

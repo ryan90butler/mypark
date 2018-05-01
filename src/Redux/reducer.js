@@ -15,6 +15,7 @@ function userInfo (state=[],action){
 function myParkAdd (state=[],action){
   switch(action.type){
     case`${ADD_TO_MY_PARKS}_FULFILLED`:
+    case`${PARK_ID}_FULFILLED`:
     return action.payload.data;
     case`${ADD_TO_MY_PARKS}_REJECTED`:
     return ['Failed to work'];
