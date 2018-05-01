@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
 import axios from 'axios';
-import { addToMyParks } from '../../Redux/Actions/action';
+import { addToMyParks, getParkId } from '../../Redux/Actions/action';
 
 class AddToMyParks extends Component{
   constructor(){
     super()
     this.removePark = this.removePark.bind(this)
   }
+
+  // componentDidMount(){
+  //   this.props.getParkId()
+  //   .then(r=>{
+  //     console.log(r)
+  //   })
+  // }
 
   removePark(parkId){
     axios.delete(`api/remove/`+ parkId)
@@ -21,10 +28,9 @@ class AddToMyParks extends Component{
   }
 
   //individualize each parkid on add?
-
   render(){
+    // const myParkId = this.props.mypar
     const { addToMyParks, parkid} = this.props
-    console.log(this.props.parkid)
     return(
       <div>
       {/* {this.props.myParkAdd ?
@@ -32,12 +38,15 @@ class AddToMyParks extends Component{
       <button className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>This is my Add Button</button>
       {/* } */}
       </div>
-    )
-  }
+    )}
 }
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators({addToMyParks}, dispatch);
+	return bindActionCreators({addToMyParks, getParkId}, dispatch);
 }
 
-export default connect(state => state,mapDispatchToProps)(AddToMyParks);
+function mapStateToProps({userInfo, getParkId}){
+  return {userInfo, getParkId}
+  }
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddToMyParks);

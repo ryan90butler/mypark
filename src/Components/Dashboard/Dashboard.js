@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import {connect} from 'react-redux';
-import {getUser, addToMyParks} from '../../Redux/Actions/action';
+import {getUser} from '../../Redux/Actions/action';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
 import DetailButton from '../Common/DetailButton';
@@ -92,12 +92,10 @@ render() {
   }
   }
 
-function mapStateToProps({userInfo}){
-  return {userInfo}
-  }
-
-function mapDispatchToProps(dispatch){
-	return bindActionCreators({getUser}, dispatch);
-  }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+  function mapStateToProps({userInfo}){
+    return {userInfo}
+    }
+  function mapDispatchToProps(dispatch){
+    return bindActionCreators({getUser}, dispatch);
+    }
+  export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -126,7 +126,7 @@ app.get('/api/user-data', (req, res) => {
     });
 app.post(`/api/park-data`, (req,res) =>{
         const userid = req.session.user;
-        const {parkid} = req.body;
+        const parkid = req.body.parkid;
 
         req.db.user_parks.insert({parkid, userid})
         .then((r)=>{
@@ -145,6 +145,14 @@ app.post(`/api/park-data`, (req,res) =>{
         .catch((err)=>{
             throw err;
         })
+    })
+})
+
+app.get(`/api/park-id-list`, (req,res)=>{
+    const userId = req.session.user;
+    req.db.getParkId({userId})
+    .then(parkId=>{
+        res.send(parkId)
     })
 })
 app.get(`/api/myparks`,(req,res)=>{

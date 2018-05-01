@@ -1,4 +1,4 @@
-import {GET_USER,ADD_TO_MY_PARKS, GET_DETAILS, ADD_COMMENTS, GET_COMMENTS, REMOVE_COMMENT} from './Actions/constraints';
+import {GET_USER,ADD_TO_MY_PARKS, GET_DETAILS, ADD_COMMENTS, GET_COMMENTS, REMOVE_COMMENT, PARK_ID} from './Actions/constraints';
 import { combineReducers } from 'redux';
 
 function userInfo (state=[],action){
@@ -46,7 +46,17 @@ function parkComments (state=[],action){
     return state;
   }
 }
+function parkId (state=[],action){
+  switch(action.type){
+    case`${PARK_ID}_FULFILLED`:
+      return action.payload.data;
+    case`${PARK_ID}_REJECTED`:
+    return ['Failed to work'];
+    default:
+    return state;
+  }
+}
 
-const rootReducer = combineReducers({userInfo, myParkAdd, parkDetail, parkComments})
+const rootReducer = combineReducers({userInfo, parkId, myParkAdd, parkDetail, parkComments})
 
 export default rootReducer;
