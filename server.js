@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
 const session = require('express-session');
-// const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 require('dotenv').config({ path: __dirname + '/.env'});
@@ -37,6 +37,29 @@ massive(process.env.CONNECTION_STRING)
         rolling: true,
         resave: false,
     }));
+
+// function configureLogin(passport) {
+//     passport.use('login', new LocalStrategy({
+//         usernameField: 'email', // req.body.email != req.body.username
+//         passReqToCallback: true,
+//     }, (req, email, password, done) => {
+//         req.db.user_table.findOne({ email })
+//             .then(user => {
+//                 if (!user || !bcrypt.compareSync(password, user.password)) {
+//                     return done('Invalid email or password');
+//                 }
+
+//                 delete user.password;
+
+//                 done(null, user);
+//             })
+//             .catch(err => {
+//                 done(err);
+//             });
+//     }));
+
+//     return passport;
+// }
 
 app.get('/api/parks',(req,res) => {
     getPark(req.query.state)
@@ -150,7 +173,7 @@ app.post(`/api/park-data`, (req,res) =>{
 
 app.get(`/api/park-id-list`, (req,res)=>{
     const userId = req.session.user;
-    req.db.getParkId({userId})
+    return req.db.getParkId({userId})
     .then(parkId=>{
         res.send(parkId)
     })

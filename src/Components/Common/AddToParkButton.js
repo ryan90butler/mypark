@@ -10,11 +10,8 @@ class AddToMyParks extends Component{
     this.removePark = this.removePark.bind(this)
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.props.getParkId()
-    .then(r=>{
-      console.log(r)
-    })
   }
 
   removePark(parkId){
