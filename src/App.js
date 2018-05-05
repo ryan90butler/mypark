@@ -19,7 +19,7 @@ class App extends Component {
         <Route path={`/updateuser`} component={UpdateUser}/>
         <Route path={`/addpark`} component={AddPark}/>
         <Route path={`/details/:id`} component={Details}/>
-        <Route path={`/`} exact component={Login}/>
+        <Route path={`/`} component={Login}/>
         </Switch>
 
       </Router>
