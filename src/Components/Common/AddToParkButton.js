@@ -27,7 +27,14 @@ class AddToMyParks extends Component{
   //individualize each parkid on add?
   render(){
     // const myParkId = this.props.mypar
+
     const { addToMyParks, parkid} = this.props
+
+    // const myAddedProps = this.props.addToMyParks.map((data, i)=>(
+    //   <div>{data.parkid}</div>
+    // ))
+
+    // if this.props.addToMyParks.
     return(
       <div>
       {/* {this.props.myParkAdd ?

@@ -6,9 +6,14 @@ import axios from 'axios';
 import {getUser, getParkDetails, removeComments, getParkComments} from '../../Redux/Actions/action';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import GoogleMapReact from 'google-map-react'
 import './Details.scss';
 
 class Details extends Component {
+  static defaultProps = {
+    center: { lat: 37.3882362, lng: -113.0408429},
+    zoom: 12
+  }
   constructor(props){
     super(props)
     this.state = {
@@ -16,7 +21,9 @@ class Details extends Component {
       origin: '',
       destination: '',
       campground: [],
-      mapDirections: []
+      mapDirections: [],
+      lat: '',
+      lng: ''
       }
   this.goBackButton = this.goBackButton.bind(this);
   this.deleteComment = this.deleteComment.bind(this);
@@ -41,8 +48,12 @@ componentWillMount(){
     origin: response.value.data[0].zip
     })
     .then((r)=>{
+     this.props.center.lat = r.data.routes[0].legs[0].end_location.lat;
+     this.props.center.lng = r.data.routes[0].legs[0].end_location.lng;
     this.setState({
     mapDirections: r.data.routes[0].legs,
+    lat: r.data.routes[0].legs[0].end_location.lat,
+    lng: r.data.routes[0].legs[0].end_location.lng
     });
   })
 })
@@ -74,6 +85,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
   }
 
   render() {
+    const AnyReactComponent = ({ text }) => <div>{ text }</div>;
     const distance = this.state.mapDirections.map((data, i)=>(
       <div className="distance-container" key={i}>
         {data.start_address}
@@ -101,7 +113,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
           {data.userLastName}
           <ul/>
           {this.state.userId === data.user_id?
-          <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this comment?')) this.deleteComment(data.id, data.parkid)}}>you may delete</button> :null
+          <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this comment?')) this.deleteComment(data.id, data.parkid)}}>Remove Comment</button> :null
           }
           </div>
         </div>
@@ -173,6 +185,20 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       <Header/>
         {parkDetails}
         {distance}
+        {/* <div className='google-map' style={{ height: '50vh', width: '50%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{key:`AIzaSyA6Op8M9oonOVssQ5A5RcES2QGubuDq1Eg`}}
+          defaultCenter={ this.props.center}
+          defaultZoom={ this.props.zoom }
+          lat={ this.state.lat}
+          lng={ this.state.lng }>
+          <AnyReactComponent
+            lat={ this.state.lat}
+            lng={ this.state.lng }
+          />
+        </GoogleMapReact>
+      </div> */}
+
         <div>
           <div>
           {campgrounds.length ? <div className="campground-container"><h2>Campgrounds</h2>
