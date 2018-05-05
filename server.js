@@ -39,7 +39,11 @@ massive(process.env.CONNECTION_STRING)
         resave: false,
     }));
 
-app.use(express.static(path.join(__dirname, '/build')));
+
+
+app.get('/api/hello', (req, res)=>{
+    res.send('This worked');
+})
 
 app.get('/api/parks',(req,res) => {
     getPark(req.query.state)
@@ -247,6 +251,7 @@ function checkDb() {
             }
         };
     };
+    app.use(express.static(path.join(__dirname, '/build')));
 
 const port = process.env.PORT || 8080
 app.listen(port,()=>{
