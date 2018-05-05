@@ -2,6 +2,7 @@
   "name": "mypark",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
@@ -66,7 +67,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "dev": "node scripts/start.js",
+    "start": "node server.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "serve": "nodemon server.js"

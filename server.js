@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('./build'));
 
-massive(process.env.CONNECTION_STRING)
+massive(process.env.DATABASE_URL)
   .then(db => {
     console.log("db is connected");
     app.set("db", db);
@@ -277,6 +277,6 @@ function checkDb() {
 
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(port, function () {
+  console.log(`Server listening on port ${this.address().port}`);
 });
