@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 massive(process.env.DATABASE_URL)
   .then(db => {
@@ -276,8 +276,8 @@ function checkDb() {
   };
 }
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/build'));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 const port = process.env.PORT || 8080;
 app.listen(port, function () {
