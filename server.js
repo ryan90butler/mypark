@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
 const session = require('express-session');
+const path = require('path');
 // const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
@@ -37,6 +38,8 @@ massive(process.env.CONNECTION_STRING)
         rolling: true,
         resave: false,
     }));
+
+    app.use(express.static(path.join(__dirname, '/build')));
 
 // function configureLogin(passport) {
 //     passport.use('login', new LocalStrategy({
