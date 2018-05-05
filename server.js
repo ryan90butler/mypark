@@ -43,6 +43,7 @@ app.use(
 );
 
 app.get("/api/hello", (req, res) => {
+    console.log('I did something')
   res.send("This worked");
 });
 
@@ -276,7 +277,7 @@ function checkDb() {
 }
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/build/index.html'));
+    res.sendFile(path.join(__dirname+'/build'));
   });
 const port = process.env.PORT || 8080;
 app.listen(port, function () {
