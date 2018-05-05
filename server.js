@@ -39,30 +39,7 @@ massive(process.env.CONNECTION_STRING)
         resave: false,
     }));
 
-    app.use(express.static(path.join(__dirname, '/build')));
-
-// function configureLogin(passport) {
-//     passport.use('login', new LocalStrategy({
-//         usernameField: 'email', // req.body.email != req.body.username
-//         passReqToCallback: true,
-//     }, (req, email, password, done) => {
-//         req.db.user_table.findOne({ email })
-//             .then(user => {
-//                 if (!user || !bcrypt.compareSync(password, user.password)) {
-//                     return done('Invalid email or password');
-//                 }
-
-//                 delete user.password;
-
-//                 done(null, user);
-//             })
-//             .catch(err => {
-//                 done(err);
-//             });
-//     }));
-
-//     return passport;
-// }
+app.use(express.static(path.join(__dirname, '/build')));
 
 app.get('/api/parks',(req,res) => {
     getPark(req.query.state)
