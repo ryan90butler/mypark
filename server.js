@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('./build'));
+app.use(express.static(path.join(__dirname, '/build')));
 
 massive(process.env.DATABASE_URL)
   .then(db => {
@@ -275,7 +275,7 @@ function checkDb() {
   };
 }
 
-app.use(express.static(path.join(__dirname, '/build')));
+
 const port = process.env.PORT || 8080;
 app.listen(port, function () {
   console.log(`Server listening on port ${this.address().port}`);
