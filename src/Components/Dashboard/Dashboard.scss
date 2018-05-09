@@ -28,7 +28,6 @@ h2.dashboard-title {
   width: 100%;
   overflow:  scroll;
   background:  whitesmoke;
-  border: 1px black solid;
 }
 
 img.myParkImages {
@@ -41,6 +40,9 @@ img.myParkImages {
   width: 80%;
   align-content: center;
   flex-direction:  column;
+  border: 1px black solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
   button{
     justify-content: center;
     width: 20%;

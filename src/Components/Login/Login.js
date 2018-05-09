@@ -74,7 +74,7 @@ render(){
     </div>
     </div>
 </div>
-      )
+    )
   }
 }
 export default Login;

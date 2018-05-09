@@ -6,7 +6,7 @@ import axios from 'axios';
 import {getUser, getParkDetails, removeComments, getParkComments} from '../../Redux/Actions/action';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import GoogleMapReact from 'google-map-react'
+// import GoogleMapReact from 'google-map-react'
 import './Details.scss';
 
 class Details extends Component {
@@ -85,7 +85,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
   }
 
   render() {
-    const AnyReactComponent = ({ text }) => <div>{ text }</div>;
+    // const AnyReactComponent = ({ text }) => <div>{ text }</div>;
     const distance = this.state.mapDirections.map((data, i)=>(
       <div className="distance-container" key={i}>
         {data.start_address}

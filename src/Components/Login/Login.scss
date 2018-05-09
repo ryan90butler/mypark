@@ -5,12 +5,22 @@ body {
 .login-register-container {
   border: 1px black solid;
   width: 250px;
-  height: 250px;
+  height: auto;
   display: flex;
   justify-content: center;
   background: whitesmoke;
   box-shadow: 2px 3px 8px 2px black;
   margin: 0px auto;
+  .login-button{
+    display: flex;
+  }
+  button{
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 70px;
+    align-items: center;
+  }
 }
 
 .login-page {
@@ -25,8 +35,4 @@ body {
 
 .title-container {
   margin-top: -300px;
-}
-
-.login-button {
-  margin-top: 20px;
 }

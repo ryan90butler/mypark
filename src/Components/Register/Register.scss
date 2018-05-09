@@ -1,5 +1,7 @@
 .details {
   margin: 35px 150px 50px 150px;
+  display:  flex;
+  flex-direction:  column;
 }
 
 .register-form {
@@ -13,4 +15,14 @@
 .register-container {
   display:  flex;
   flex-direction:  column;
+  button{
+    height: 25px;
+    justify-content: center;
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 }

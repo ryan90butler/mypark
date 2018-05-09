@@ -73,7 +73,6 @@ render() {
     <ReviewBox parkCode={data.data[0].parkCode}/>
     <DetailButton parkName ={data.data[0].fullName} parkid = {data.data[0].parkCode}/>
     <button className="remove-button" onClick={()=>{ if (window.confirm('Are you sure you wish to delete this park?')) this.removePark(data.data[0].parkCode)}}>Remove</button>
-    <hr width="100%"/>
     </div>
   ))
   return (

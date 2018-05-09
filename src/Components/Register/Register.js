@@ -57,7 +57,7 @@ render(){
         <div className="register-container">
         <div className="details">
         <h2>Welcome to MyParks!</h2>
-        <span>MyParks allows users the ability to access travel and park information on any and all National Parks, Monuments, Landmarks, etc. in the United States.</span>
+        <span>MyParks allows you to access travel and park information on any and all National Parks, Monuments, Landmarks, etc. in the United States.</span>
         </div>
         <div className="register-form">
         <form onSubmit={(event)=>{this.registerOrLogin(event, 'register')}} >

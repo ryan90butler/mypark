@@ -4,7 +4,6 @@ const cors = require("cors");
 const massive = require("massive");
 const session = require("express-session");
 const path = require("path");
-const bcrypt = require("bcrypt");
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
