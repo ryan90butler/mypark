@@ -17,13 +17,6 @@ class Login extends Component {
       this.props.history.push('/new-user');
   }
 
-  sayHello(){
-      axios.get('/api/hello')
-        .then((response)=>{
-            console.log(response);
-        })
-  }
-
   registerOrLogin(e, login){
       e.preventDefault();
       axios.post(`/api/${login}`, {email:this.state.email, password:this.state.password})
@@ -76,8 +69,6 @@ render(){
     <button disabled={!isEnabled} type="submit">Login</button>
     <br/>
     <button onClick={this.register}>Register</button>
-    <br/>
-    <button onClick={this.sayHello}>Say Hello</button>
     </div>
     </form>
     </div>

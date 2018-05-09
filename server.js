@@ -99,7 +99,6 @@ app.post("/api/login", (req, res) => {
 app.post("/api/register", (req, res) => {
   const { email, password, firstName, lastName, city, state, zip } = req.body;
 
-  // password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
   req.db.users
     .insert({
       firstname: firstName,
