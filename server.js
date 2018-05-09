@@ -4,7 +4,6 @@ const cors = require("cors");
 const massive = require("massive");
 const session = require("express-session");
 const path = require("path");
-// const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcrypt");
 
 require("dotenv").config({ path: __dirname + "/.env" });
@@ -16,7 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '/build')));
 
 massive(process.env.DATABASE_URL)
   .then(db => {
@@ -100,7 +99,7 @@ app.post("/api/login", (req, res) => {
 app.post("/api/register", (req, res) => {
   const { email, password, firstName, lastName, city, state, zip } = req.body;
 
-  password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
+  // password = bcrypt.hashSync(password, bcrypt.genSaltSync(15));
   req.db.users
     .insert({
       firstname: firstName,
