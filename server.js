@@ -9,8 +9,8 @@ const bcrypt = require("bcrypt");
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
-const { getPark, parkDetail, parkCampgrounds } = require("./server/NPService");
-const { getMap } = require("./server/MapService");
+const { getPark, parkDetail, parkCampgrounds } = require("./service/NPService");
+const { getMap } = require("./service/MapService");
 
 const app = express();
 
@@ -41,11 +41,6 @@ app.use(
     resave: false
   })
 );
-
-app.get("/api/hello", (req, res) => {
-    console.log('I did something')
-  res.send("This worked");
-});
 
 app.get("/api/parks", (req, res) => {
   getPark(req.query.state).then(r => {
