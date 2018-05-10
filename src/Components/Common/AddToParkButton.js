@@ -39,7 +39,7 @@ class AddToMyParks extends Component{
       <div>
       {/* {this.props.myParkAdd ?
       <button className="addToMyParks-Button">Added</button>: */}
-      <button className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>This is my Add Button</button>
+      <button style={{height: 30}} className="addToMyParks-Button" onClick={()=>addToMyParks(parkid)}>Add To MyParks</button>
       {/* } */}
       </div>
     )}

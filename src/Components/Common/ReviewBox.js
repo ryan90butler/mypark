@@ -46,7 +46,6 @@ class ReviewBox extends Component{
 
   render(){
     return(
-      <div className="comment-box">
         <div>
           {this.state.addReview ?
           <form onSubmit={this.addComment}>
@@ -57,10 +56,8 @@ class ReviewBox extends Component{
 
           <input name="comments" className="input-field"type="text" value={this.state.comments} placeholder="Enter Personal Experiences" onChange={this.handleChange}/>
 
-          </form>: <button onClick={this.allowComment}>Comment</button>}
-
-          </div>
-        </div>
+        </form>: <button style={{height: 30}} onClick={this.allowComment}>Comment</button>}
+      </div>
     )
   }
 }

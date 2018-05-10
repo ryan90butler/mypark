@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 import AddToParkButton from '../Common/AddToParkButton';
 import DetailButton from '../Common/DetailButton';
@@ -15,8 +14,9 @@ class AddPark extends Component {
         search: "",
         parkData:[]
       }
-      this.handleChange = this.handleChange.bind(this)
-      this.getPark = this.getPark.bind(this)
+      this.handleChange = this.handleChange.bind(this);
+      this.getPark = this.getPark.bind(this);
+      this.backToDashboard = this.backToDashboard.bind(this);
   }
 
   handleChange(e){
@@ -25,6 +25,10 @@ class AddPark extends Component {
     this.setState({
     [name]: value,
     });
+  }
+
+  backToDashboard(){
+    this.props.history.push('/dashboard')
   }
 
   getPark(e){
@@ -45,42 +49,35 @@ class AddPark extends Component {
       return <div>Loading...</div>
     }
     const parkResults = this.state.parkData.map((data, i)=>(
-      <div className="park-container" key={data.id}>
-     <ul className ="park-box">
+      <div className="park-box"key={data.id}>
+     <h2>
       {data.fullName}
-      </ul>
-      <ul className ="park-box">
+      </h2>
+      <p>
       {data.description}
-      </ul>
+      </p>
       <div className='add-park-images-holder'>
       {data.images[0] ?
-      <div>
-      <img width="250" height="250" alt='holder' src={data.images[0].url}/>
-      </div>:null}
+      <img width="250" height="250" alt='holder' src={data.images[0].url}/>:null}
       {data.images[1] ?
-      <div>
-      <img width="250" height="250" alt='holder' src={data.images[1].url}/>
-      </div>:null}
+      <img width="250" height="250" alt='holder' src={data.images[1].url}/>:null}
       {data.images[2] ?
-      <div>
-      <img width="250" height="250" alt='holder' src={data.images[2].url}/>
-      </div>:null}
+      <img width="250" height="250" alt='holder' src={data.images[2].url}/>:null}
       </div>
-      <div className="park-buttons">
+      <div className="add-park-buttons">
       <ReviewBox/>
       <DetailButton parkName ={data.fullName} parkid = {data.parkCode}/>
       <AddToParkButton parkid = {data.parkCode}/>
       </div>
       </div>
     ))
-    return (
-      <div className="AddPark">
+  return (
+    <div className="AddPark">
       <Header/>
-        AddPark
-
+      <p>You can browse National Parks, Monuments, or Landmarks by selecting any state in the United States.</p>
 <form onSubmit={this.getPark}>
-  <select name='state' value={this.state.state} onChange={this.handleChange}>
-    <option></option>
+  <select className="select-state-drop-down"name='state' value={this.state.state} onChange={this.handleChange}>
+    <option>Select State</option>
     <option value="AL">Alabama</option>
     <option value="AK">Alaska</option>
     <option value="AZ">Arizona</option>
@@ -136,12 +133,14 @@ class AddPark extends Component {
   <br/>
   <button className="searchButton">Search</button>
 </form>
+{parkResults.length ?
 <div className='park-list'>
   {parkResults}
+  </div>:
+  null}
+ <button className="dashboard-button"onClick={this.backToDashboard}>Dashboard</button>
   </div>
-    <Link to='/dashboard'>Back</Link>
-  </div>
-    );
+  );
   }
 }
 

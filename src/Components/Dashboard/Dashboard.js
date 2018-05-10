@@ -51,28 +51,26 @@ componentDidMount(){
 render() {
   const myParkData = this.state.myParks.map((data, i)=>(
     <div className="my-park-details" key={i}>
-    <ul>
+    <h2>
     {data.data[0].fullName}
-    </ul>
-    <ul>
+    </h2>
+    <p>
     {data.data[0].description}
-    </ul>
+    </p>
       <div>{data.data[0].images[0] ?
      <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>:null}
      {data.data[0].images[1] ?
      <img className="myParkImages"src={data.data[0].images[1].url} alt="noGo"/>:null}
-      <div>{data.data[0].images[2] ?
+      {data.data[0].images[2] ?
      <img className="myParkImages"src={data.data[0].images[2].url} alt="noGo"/>:null}
      {data.data[0].images[3] ?
      <img className="myParkImages"src={data.data[0].images[3].url} alt="noGo"/>:null}
      </div>
-     </div>
-    <ul>
-      </ul>
-
-    <ReviewBox parkCode={data.data[0].parkCode}/>
+     <div className="park-buttons">
     <DetailButton parkName ={data.data[0].fullName} parkid = {data.data[0].parkCode}/>
-    <button className="remove-button" onClick={()=>{ if (window.confirm('Are you sure you wish to delete this park?')) this.removePark(data.data[0].parkCode)}}>Remove</button>
+    <button onClick={()=>{ if (window.confirm('Are you sure you wish to delete this park?')) this.removePark(data.data[0].parkCode)}}>Remove</button>
+    <ReviewBox parkCode={data.data[0].parkCode}/>
+    </div>
     </div>
   ))
   return (
