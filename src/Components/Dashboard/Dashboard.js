@@ -57,7 +57,7 @@ render() {
     <p>
     {data.data[0].description}
     </p>
-      <div>{data.data[0].images[0] ?
+      <div className="dashboard-image-holder">{data.data[0].images[0] ?
      <img className="myParkImages"src={data.data[0].images[0].url} alt="noGo"/>:null}
      {data.data[0].images[1] ?
      <img className="myParkImages"src={data.data[0].images[1].url} alt="noGo"/>:null}

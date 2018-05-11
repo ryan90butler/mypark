@@ -21,6 +21,7 @@ button.search-button {
 h2.dashboard-title {
   font-size: 29px;
 }
+
 .MyPark-list {
   display:  flex;
   flex-direction:  column;
@@ -57,4 +58,11 @@ img.myParkImages {
     margin-left: 20px;
     margin-right: 20px;
   }
+  //make this mobile only
+
+  // @media
+  // .dashboard-image-holder{
+  //   display: flex;
+  //   overflow: scroll;
+  // }
 }
