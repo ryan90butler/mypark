@@ -23,15 +23,15 @@
     .images-holder{
     display: flex;
     flex-direction: column;
-    width: 90%;
-    height: 430px;
+    width: 750px;
+    height: 450px;
     overflow: scroll;
     margin: auto;
     justify-content: center;
     margin-bottom: 10px;
     margin-top: 10px;
     .detail-image{
-      height: 430px;
+      height: 100%;
     }
     }
     .park-buttons-detail{
