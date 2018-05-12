@@ -1,13 +1,27 @@
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('../../Assets/LibreBaskerville-Regular.ttf')
+}
+
 .Header{
   background: black;
+  font-family: 'LibreBaskerville', serif;
   color: white;
   display: flex;
   height: 100px;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   a{
     color: white;
     text-decoration: none;
+    font-size: 14px;
+  }
+  button{
+    color: white;
+    background: black;
+    border: none;
+    font-size: 14px;
   }
 }
 
@@ -16,6 +30,7 @@
 }
 
 .button-container {
+  background: black;
   display:  flex;
   flex-direction:  column;
   margin-right: 30px;
@@ -27,3 +42,26 @@
 h1.header-text {
   font-size: 44px;
 }
+
+//mobile
+@media (max-width: 499px){
+  .Header{
+    display: flex;
+    height: 100px;
+    a{
+      margin-left: 45px;
+      font-size: 12px;
+    }
+    button{
+      margin-left: 45px;
+      font-size: 12px;
+    }
+
+    .header-logo{
+      margin-left: 20px;
+    }
+    h1{
+      font-size: 30px;
+    }
+  }
+  }

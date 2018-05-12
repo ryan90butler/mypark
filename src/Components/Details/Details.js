@@ -173,7 +173,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
           {parkComments.length ? <div className="comment-container"><h2>Visitor Comments</h2>{parkComments}</div> :null}
           </div>
           </div>
-      <button className="back-button-details" onClick={this.goBackButton}>Back</button>
+      <button className="back-button-details" onClick={this.goBackButton}>New Search</button>
       </div>
     );
   }

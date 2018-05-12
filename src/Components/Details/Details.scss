@@ -1,4 +1,10 @@
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('../../Assets/LibreBaskerville-Regular.ttf')
+}
+
 .Details{
+  font-family: 'LibreBaskerville', serif;
   display: flex;
   flex-direction: column;
   .detail-box{
@@ -36,6 +42,7 @@
 }
 
 .comment-container {
+  font-family: 'LibreBaskerville', serif;
   background: whitesmoke;
   padding-bottom: 20px;
   .individual-comments {
@@ -76,6 +83,7 @@
   }
 
 .campground-container {
+  font-family: 'LibreBaskerville', serif;
   border: 1px black solid;
   display: flex;
   height: auto;
@@ -88,6 +96,26 @@
 }
 
 .distance-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-right: 300px;
   margin-left: 300px;
 }
+//mobile
+@media (max-width: 499px){
+  .distance-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30px;
+    margin-left: 30px;
+    }
+    .detail-box{
+      .images-holder{
+        display: flex;
+        overflow: scroll;
+        flex-direction: row;
+      }
+    }
+  }

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('../../Assets/LibreBaskerville-Regular.ttf')
+}
+
 button.search-button {
   width: auto;
   border:  1px black solid;
@@ -11,6 +16,7 @@ button.search-button {
 }
 
 .Dashboard {
+  font-family: 'LibreBaskerville', serif;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,11 +64,12 @@ img.myParkImages {
     margin-left: 20px;
     margin-right: 20px;
   }
-  //make this mobile only
-
-  // @media
-  // .dashboard-image-holder{
-  //   display: flex;
-  //   overflow: scroll;
-  // }
+  //mobile only
+  @media (max-width: 499px){
+  .dashboard-image-holder{
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    }
+  }
 }

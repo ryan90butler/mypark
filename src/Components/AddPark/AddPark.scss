@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('../../Assets/LibreBaskerville-Regular.ttf')
+}
+
+body {
+  margin: 0px;
+  font-family: 'LibreBaskerville', serif;
+}
+
 .park-list {
   overflow: scroll;
   height: 70vh;
@@ -74,3 +84,24 @@ margin: auto;
 width: 90%;
 justify-content: space-around;
 }
+//mobile friendly
+@media (max-width: 499px){
+  .park-list{
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 95%;
+    }
+    .AddPark{
+      .park-box{
+        width: 95%;
+        margin: 0px;
+        .add-park-images-holder{
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }

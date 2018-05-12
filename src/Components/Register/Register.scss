@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('../../Assets/LibreBaskerville-Regular.ttf')
+}
+
+body {
+  margin: 0px;
+  font-family: 'LibreBaskerville', serif;
+}
+
 .details {
   margin: 35px 150px 50px 150px;
   display:  flex;
