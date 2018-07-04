@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-=======
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 body {
   margin: 0px;
   font-family: 'LibreBaskerville', serif; }
@@ -45,12 +39,8 @@ body {
     border-radius: 4px;
     background: green;
     margin-bottom: 10px;
-<<<<<<< HEAD
-    color: white; }
-=======
     color: white;
     cursor: pointer; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   .AddPark .park-box {
     border: 1px black solid;
     margin-top: 5px;
@@ -68,12 +58,8 @@ body {
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
-<<<<<<< HEAD
-  margin-bottom: 10px; }
-=======
   margin-bottom: 10px;
   cursor: pointer; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 .add-park-images-holder {
   display: flex;
@@ -84,11 +70,7 @@ body {
   width: 90%;
   justify-content: space-around; }
 
-<<<<<<< HEAD
-@media (max-width: 499px) {
-=======
 @media (max-width: 320px) {
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   .park-list {
     overflow: scroll;
     display: flex;
@@ -101,12 +83,6 @@ body {
     margin: 0px; }
     .AddPark .park-box .add-park-images-holder img {
       width: 100%; } }
-<<<<<<< HEAD
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-=======
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 button.search-button {
   width: auto;
   border: 1px black solid;
@@ -116,24 +92,14 @@ button.search-button {
   background: green;
   font-size: 22px;
   height: auto;
-<<<<<<< HEAD
-  padding: 8px; }
-=======
   padding: 8px;
   cursor: pointer; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 .Dashboard {
   font-family: 'LibreBaskerville', serif;
   width: 100%;
   display: flex;
-<<<<<<< HEAD
-  flex-direction: column;
-  background: whitesmoke;
-  background-size: contain; }
-=======
   flex-direction: column; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 h2.dashboard-title {
   font-size: 29px; }
@@ -142,16 +108,10 @@ h2.dashboard-title {
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< HEAD
-  width: 100%;
-  overflow: scroll;
-  background: whitesmoke; }
-=======
   margin-left: auto;
   margin-right: auto;
   overflow: scroll;
   height: auto; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 img.myParkImages {
   height: 280px;
@@ -163,62 +123,33 @@ img.myParkImages {
   align-content: center;
   flex-direction: column;
   border: 1px black solid;
-<<<<<<< HEAD
-  border-radius: 4px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background: white; }
-=======
   background: white;
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
   overflow: scroll; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   .my-park-details .park-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
     height: 30px;
     width: auto;
-<<<<<<< HEAD
-    margin-bottom: 10px; }
-  .my-park-details p {
-    margin-left: 20px;
-    margin-right: 20px; }
-  @media (max-width: 499px) {
-=======
     margin-bottom: 10px;
     cursor: pointer; }
   .my-park-details p {
     margin-left: 20px;
     margin-right: 20px; }
   @media (max-width: 320px) {
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
     .my-park-details .dashboard-image-holder {
       overflow: scroll;
       display: flex;
       flex-direction: row; } }
 
-<<<<<<< HEAD
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-=======
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 .Details {
   font-family: 'LibreBaskerville', serif;
   display: flex;
   flex-direction: column; }
   .Details .detail-box {
-<<<<<<< HEAD
-    background: white; }
-    .Details .detail-box p {
-      margin: 0px 50px;
-      margin-bottom: 10px; }
-    .Details .detail-box button {
-      margin-top: 5px; }
-=======
     background: white;
     border-radius: 4px;
     width: 70%;
@@ -236,18 +167,13 @@ img.myParkImages {
     .Details .detail-box button {
       margin-top: 5px;
       margin-bottom: 5px; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
     .Details .detail-box a {
       text-decoration: none;
       margin: auto; }
     .Details .detail-box .images-holder {
       display: flex;
       flex-direction: column;
-<<<<<<< HEAD
-      width: 750px;
-=======
       width: auto;
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
       height: 450px;
       overflow: scroll;
       margin: auto;
@@ -263,14 +189,6 @@ img.myParkImages {
 .comment-container {
   font-family: 'LibreBaskerville', serif;
   background: whitesmoke;
-<<<<<<< HEAD
-  padding-bottom: 20px; }
-  .comment-container .individual-comments {
-    display: grid;
-    width: 400px;
-    margin: auto;
-    border: 1px solid;
-=======
   padding-bottom: 20px;
   width: 70%;
   margin-left: auto;
@@ -283,7 +201,6 @@ img.myParkImages {
     width: 90%;
     margin: auto;
     border-top: 1px solid;
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
     height: auto; }
     .comment-container .individual-comments .delete-comment-button {
       width: 70px;
@@ -295,20 +212,13 @@ img.myParkImages {
       margin-bottom: 5px; }
   .comment-container h3 {
     margin: 0px; }
-<<<<<<< HEAD
-=======
   .comment-container h2 {
     margin: 0px; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 .park-container {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  width: 90%; }
-=======
   width: 50%; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 .back-button-details {
   margin-left: auto;
@@ -326,20 +236,6 @@ img.myParkImages {
   background: whitesmoke;
   overflow: scroll;
   flex-direction: column;
-<<<<<<< HEAD
-  width: 90%;
-  margin: auto;
-  margin-bottom: 20px; }
-
-.distance-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 300px;
-  margin-left: 300px; }
-
-@media (max-width: 499px) {
-=======
   width: 70%;
   margin: auto;
   margin-top: 10px;
@@ -365,7 +261,6 @@ button.back-button-details {
   .comment-container {
     width: 85%; }
 
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   .distance-container {
     display: flex;
     flex-direction: column;
@@ -377,12 +272,6 @@ button.back-button-details {
     display: flex;
     overflow: scroll;
     flex-direction: row; } }
-<<<<<<< HEAD
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-=======
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 .Header {
   background: black;
   font-family: 'LibreBaskerville', serif;
@@ -395,24 +284,16 @@ button.back-button-details {
   .Header a {
     color: white;
     text-decoration: none;
-<<<<<<< HEAD
-    font-size: 14px; }
-=======
     font-size: 14px;
     font-family: 'LibreBaskerville', serif;
     cursor: pointer; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   .Header button {
     color: white;
     background: black;
     border: none;
-<<<<<<< HEAD
-    font-size: 14px; }
-=======
     font-size: 14px;
     font-family: 'LibreBaskerville', serif;
     cursor: pointer; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 .header-logo {
   margin-left: 80px; }
@@ -424,38 +305,11 @@ button.back-button-details {
   margin-right: 30px;
   justify-content: space-evenly;
   height: 100%;
-<<<<<<< HEAD
-  align-content: space-evenly; }
-
-h1.header-text {
-  font-size: 44px; }
-
-@media (max-width: 499px) {
-  .Header {
-    display: flex;
-    height: 100px; }
-    .Header a {
-      margin-left: 45px;
-      font-size: 12px; }
-    .Header button {
-      margin-left: 45px;
-      font-size: 12px; }
-    .Header .header-logo {
-      margin-left: 20px; }
-    .Header h1 {
-      font-size: 30px; } }
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-body {
-  margin: 0px;
-=======
   align-content: space-evenly;
   font-family: 'LibreBaskerville', serif; }
 
 h1.header-text {
   font-size: 44px;
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
   font-family: 'LibreBaskerville', serif; }
 
 @media (max-width: 320px) {
@@ -497,27 +351,10 @@ h1.header-text {
   display: flex;
   height: 100vh;
   width: 100%;
-<<<<<<< HEAD
-  flex-direction: column;
-  background-image: url("../../Assets/monumentValley.jpg");
-  background-position: center;
-  background-size: cover; }
-
-.title-container {
-  margin-top: -300px; }
-
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url("../../Assets/LibreBaskerville-Regular.ttf"); }
-body {
-  margin: 0px;
-  font-family: 'LibreBaskerville', serif; }
-=======
   flex-direction: column; }
 
 .title-container {
   margin-top: 150px; }
->>>>>>> 3445d0bb0078711bce993e1a67cca9a371a85bc9
 
 input.update-input {
   border: none;
