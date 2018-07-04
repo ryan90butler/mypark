@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Dashboard from './Components/Dashboard/Dashboard';
 import UpdateUser from './Components/UpdateUser/UpdateUser';
 import AddPark from './Components/AddPark/AddPark';
-import ContactUs from './Components/ContactUs/ContactUs';
 import Details from './Components/Details/Details';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
@@ -20,7 +19,6 @@ class App extends Component {
         <Route path={`/updateuser`} component={UpdateUser}/>
         <Route path={`/addpark`} component={AddPark}/>
         <Route path={`/details/:id`} component={Details}/>
-        <Route path={`/contact`} component ={ContactUs}/>
         <Route path={`/`}  component={Login}/>
         </Switch>
       </Router>
