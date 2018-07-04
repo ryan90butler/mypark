@@ -131,6 +131,7 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       <div className="detail-box" key={data.id}>
       <h2>{data.fullName}</h2>
       <p>{data.description}</p>
+      <p>{distance}</p>
       <a href={data.url} target="_blank">Visit Official NPS site</a>
       <div className='images-holder'>
          {data.images[0] ?
@@ -162,7 +163,6 @@ axios.get(`/api/campgrounds/${this.props.match.params.id}`)
       <div className="Details">
       <Header/>
         {parkDetails}
-        {distance}
         <div>
           <div>
           {campgrounds.length ? <div className="campground-container"><h2>Campgrounds</h2>
