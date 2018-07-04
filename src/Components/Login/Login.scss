@@ -1,13 +1,3 @@
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url('../../Assets/LibreBaskerville-Regular.ttf')
-}
-
-body {
-  margin: 0px;
-  font-family: 'LibreBaskerville', serif;
-}
-
 .login-register-container {
   border: 1px black solid;
   width: 250px;
@@ -34,11 +24,8 @@ body {
   height: 100vh;
   width: 100%;
   flex-direction: column;
-  background-image: url("../../Assets/monumentValley.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 .title-container {
-  margin-top: -300px;
+  margin-top: 150px;
 }
