@@ -4,6 +4,7 @@ const cors = require("cors");
 const massive = require("massive");
 const session = require("express-session");
 const path = require("path");
+const nodemailer = require('nodemailer');
 require("dotenv").config({ path: __dirname + "/.env" });
 
 const app = express();
@@ -58,7 +59,55 @@ app.get(`/api/park-id-list`, parksController.parkIdList);
 app.get(`/api/get-comments/:id`, commentController.getComments);
 app.post(`/api/add-comment`, commentController.addComment);
 app.delete(`/api/remove-comment/:id`, commentController.deleteComments);
+
 //server port
+
+app.post(`/emailSend`, (req,res)=>{
+  const output = `
+  <p>Does this email work?</p>
+  <h3>Contact Info</h3>
+  <ul>
+    <li>Name: ${req.body.name}</li>
+    <li>email: ${req.body.email}</li>
+  </ul>
+  <h3>Message:</h3>
+  <p>${req.body.message}</p>
+  `;
+
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'b6utle5r@gmail.com',// generated ethereal user
+        pass: 'rebutler65!'// generated ethereal password
+    },
+    tls:{
+      rejectUnauthorized: false
+    }
+});
+
+// setup email data with unicode symbols
+let mailOptions = {
+    from: '"MyParks" <b6utle5r@gmail.com>', // sender address
+    to: 'ryan90butler@gmail.com', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world?', // plain text body
+    html: output // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    res.send('message sent')
+});
+})
+
 const port = process.env.PORT || 8080;
 app.listen(port, function () {
   console.log(`Server listening on port ${this.address().port}`);

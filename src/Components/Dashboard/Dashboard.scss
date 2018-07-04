@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'LibreBaskerville';
-  src: url('../../Assets/LibreBaskerville-Regular.ttf')
-}
-
 button.search-button {
   width: auto;
   border:  1px black solid;
@@ -13,6 +8,7 @@ button.search-button {
   font-size: 22px;
   height: auto;
   padding: 8px;
+  cursor: pointer;
 }
 
 .Dashboard {
@@ -20,8 +16,6 @@ button.search-button {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: whitesmoke;
-  background-size: contain;
 }
 
 h2.dashboard-title {
@@ -30,11 +24,12 @@ h2.dashboard-title {
 
 .MyPark-list {
   display:  flex;
-  flex-direction:  column;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   overflow:  scroll;
-  background:  whitesmoke;
+  height: auto;
 }
 
 img.myParkImages {
@@ -48,10 +43,11 @@ img.myParkImages {
   align-content: center;
   flex-direction:  column;
   border: 1px black solid;
+  background: white;
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background: white;
+  overflow: scroll;
   .park-buttons{
     display: flex;
     flex-direction: row;
@@ -59,13 +55,14 @@ img.myParkImages {
     height: 30px;
     width: auto;
     margin-bottom: 10px;
+    cursor: pointer;
   }
   p{
     margin-left: 20px;
     margin-right: 20px;
   }
   //mobile only
-  @media (max-width: 499px){
+  @media (max-width: 320px){
   .dashboard-image-holder{
     overflow: scroll;
     display: flex;
