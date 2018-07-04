@@ -1,5 +1,3 @@
-
-
 button.search-button {
   width: auto;
   border:  1px black solid;
@@ -10,6 +8,7 @@ button.search-button {
   font-size: 22px;
   height: auto;
   padding: 8px;
+  cursor: pointer;
 }
 
 .Dashboard {
@@ -17,8 +16,6 @@ button.search-button {
   width: 100%;
   display: flex;
   flex-direction: column;
-  // background: whitesmoke;
-  // background-size: contain;
 }
 
 h2.dashboard-title {
@@ -29,12 +26,10 @@ h2.dashboard-title {
   display:  flex;
   flex-direction: column;
   align-items: center;
-  // width: 70%;
   margin-left: auto;
   margin-right: auto;
   overflow:  scroll;
   height: auto;
-  // background:  whitesmoke;
 }
 
 img.myParkImages {
@@ -60,13 +55,14 @@ img.myParkImages {
     height: 30px;
     width: auto;
     margin-bottom: 10px;
+    cursor: pointer;
   }
   p{
     margin-left: 20px;
     margin-right: 20px;
   }
   //mobile only
-  @media (max-width: 499px){
+  @media (max-width: 320px){
   .dashboard-image-holder{
     overflow: scroll;
     display: flex;
