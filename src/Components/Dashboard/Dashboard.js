@@ -14,7 +14,7 @@ class Dashboard extends Component {
     this.state = {
         firstName: '',
         myParks: [],
-        myParkPictures: []
+        loading: true
     }
     this.removePark = this.removePark.bind(this);
     this.searchForParks = this.searchForParks.bind(this);
@@ -24,14 +24,19 @@ componentDidMount(){
       this.props.getUser()
       .then((r)=>{
         this.setState({
-            firstName: r.value.data[0].firstname
+          firstName: r.value.data[0].firstname,
         });
         })
       .then(()=>{
         axios.get(`/api/myparks`)
         .then(r=>{
         this.setState({
-          myParks: r.data
+          myParks: r.data,
+        })
+      })
+      .then(r => {
+        this.setState({
+          loading: false
         })
       })
     })

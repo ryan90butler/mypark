@@ -39,7 +39,8 @@ body {
     border-radius: 4px;
     background: green;
     margin-bottom: 10px;
-    color: white; }
+    color: white;
+    cursor: pointer; }
   .AddPark .park-box {
     border: 1px black solid;
     margin-top: 5px;
@@ -57,7 +58,8 @@ body {
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  cursor: pointer; }
 
 .add-park-images-holder {
   display: flex;
@@ -68,7 +70,7 @@ body {
   width: 90%;
   justify-content: space-around; }
 
-@media (max-width: 499px) {
+@media (max-width: 320px) {
   .park-list {
     overflow: scroll;
     display: flex;
@@ -90,7 +92,8 @@ button.search-button {
   background: green;
   font-size: 22px;
   height: auto;
-  padding: 8px; }
+  padding: 8px;
+  cursor: pointer; }
 
 .Dashboard {
   font-family: 'LibreBaskerville', serif;
@@ -131,11 +134,12 @@ img.myParkImages {
     justify-content: center;
     height: 30px;
     width: auto;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    cursor: pointer; }
   .my-park-details p {
     margin-left: 20px;
     margin-right: 20px; }
-  @media (max-width: 499px) {
+  @media (max-width: 320px) {
     .my-park-details .dashboard-image-holder {
       overflow: scroll;
       display: flex;
@@ -147,22 +151,29 @@ img.myParkImages {
   flex-direction: column; }
   .Details .detail-box {
     background: white;
-    margin-top: 5px;
+    border-radius: 4px;
     width: 70%;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-top: 10px;
+    border: 1px black solid; }
     .Details .detail-box p {
       margin: 0px 50px;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 5px;
+      padding-right: 5px; }
     .Details .detail-box button {
-      margin-top: 5px; }
+      margin-top: 5px;
+      margin-bottom: 5px; }
     .Details .detail-box a {
       text-decoration: none;
       margin: auto; }
     .Details .detail-box .images-holder {
       display: flex;
       flex-direction: column;
-      width: 750px;
+      width: auto;
       height: 450px;
       overflow: scroll;
       margin: auto;
@@ -177,11 +188,14 @@ img.myParkImages {
 
 .comment-container {
   font-family: 'LibreBaskerville', serif;
-  background: whitesmoke;
+  background: white;
   padding-bottom: 20px;
   width: 70%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-top: 5px;
+  border: 1px black solid;
+  border-radius: 4px; }
   .comment-container .individual-comments {
     display: grid;
     width: 90%;
@@ -219,14 +233,41 @@ img.myParkImages {
   border: 1px black solid;
   display: flex;
   height: auto;
-  background: whitesmoke;
+  background: white;
   overflow: scroll;
   flex-direction: column;
   width: 70%;
   margin: auto;
-  margin-bottom: 10px; }
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px; }
+  .campground-container ul {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 0px;
+    border-top: 1px solid black; }
+
+button.back-button-details {
+  height: 30px;
+  width: 175px;
+  font-size: 15px;
+  border-radius: 4px;
+  background: green;
+  margin-bottom: 10px;
+  color: white;
+  cursor: pointer; }
 
 @media (max-width: 499px) {
+  .Details .detail-box {
+    width: 85%; }
+
+  .campground-container {
+    width: 85%; }
+
+  .comment-container {
+    width: 85%; }
+
   .distance-container {
     display: flex;
     flex-direction: column;
@@ -250,12 +291,16 @@ img.myParkImages {
   .Header a {
     color: white;
     text-decoration: none;
-    font-size: 14px; }
+    font-size: 14px;
+    font-family: 'LibreBaskerville', serif;
+    cursor: pointer; }
   .Header button {
     color: white;
     background: black;
     border: none;
-    font-size: 14px; }
+    font-size: 14px;
+    font-family: 'LibreBaskerville', serif;
+    cursor: pointer; }
 
 .header-logo {
   margin-left: 80px; }
@@ -267,30 +312,30 @@ img.myParkImages {
   margin-right: 30px;
   justify-content: space-evenly;
   height: 100%;
-  align-content: space-evenly; }
+  align-content: space-evenly;
+  font-family: 'LibreBaskerville', serif; }
 
 h1.header-text {
-  font-size: 44px; }
+  font-size: 44px;
+  font-family: 'LibreBaskerville', serif; }
 
-@media (max-width: 499px) {
+@media (max-width: 320px) {
   .Header {
     display: flex;
     height: 100px;
     width: 100%; }
     .Header a {
       margin-left: 45px;
-      font-size: 12px; }
+      font-size: 12px;
+      font-family: 'LibreBaskerville', serif; }
     .Header button {
       margin-left: 45px;
-      font-size: 12px; }
+      font-size: 12px;
+      font-family: 'LibreBaskerville', serif; }
     .Header .header-logo {
       margin-left: 20px; }
     .Header h1 {
       font-size: 30px; } }
-body {
-  margin: 0px;
-  font-family: 'LibreBaskerville', serif; }
-
 .login-register-container {
   border: 1px black solid;
   width: 250px;
@@ -316,11 +361,7 @@ body {
   flex-direction: column; }
 
 .title-container {
-  margin-top: 200px; }
-
-body {
-  margin: 0px;
-  font-family: 'LibreBaskerville', serif; }
+  margin-top: 150px; }
 
 input.update-input {
   border: none;
