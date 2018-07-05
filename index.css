@@ -24,7 +24,7 @@ body {
   box-shadow: 1px 1px 11px black; }
 
 .AddPark {
-  background: whitesmoke;
+  background: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -342,7 +342,7 @@ h1.header-text {
   height: auto;
   display: flex;
   justify-content: center;
-  background: whitesmoke;
+  background: white;
   box-shadow: 2px 3px 8px 2px black;
   margin: 0px auto; }
   .login-register-container .login-button {
