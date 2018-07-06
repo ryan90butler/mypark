@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getUser} from '../../Redux/Actions/action';
 import {bindActionCreators} from 'redux';
@@ -20,8 +19,9 @@ class UpdateUser extends Component {
       zip: "",
       id: ""
   }
-  this.handleChange = this.handleChange.bind(this)
-  this.updateUser = this.updateUser.bind(this)
+  this.handleChange = this.handleChange.bind(this);
+  this.updateUser = this.updateUser.bind(this);
+  this.toDash = this.toDash.bind(this);
   }
 
   handleChange(e){
@@ -29,7 +29,9 @@ class UpdateUser extends Component {
         [e.target.name]: e.target.value,
     });
   }
-
+  toDash(){
+    this.props.history.push('/dashboard')
+  }
   componentDidMount(){
     this.props.getUser()
     .then((r)=>{
@@ -62,16 +64,17 @@ class UpdateUser extends Component {
       <div className="UpdateUser">
       <Header/>
   <div className="update-form">
+  <div className="update-table">
     <form onSubmit={(event)=>{this.updateUser()}}>
     <h2>
       Update User
       </h2>
       <div>
-        <label className="update-label">First Name</label>
-         <br/>
-          <input className="update-input"  name="firstName" value={this.state.firstName} onChange={this.handleChange} type="text"/>
-          </div>
-          <br/>
+      <label className="update-label">First Name</label>
+      <br/>
+      <input className="update-input"  name="firstName" value={this.state.firstName} onChange={this.handleChange} type="text"/>
+      </div>
+      <br/>
       <div>
       <label className="update-label">Last Name</label>
       <br/>
@@ -111,8 +114,9 @@ class UpdateUser extends Component {
         <button disabled={!isEnabled}className="sign-up-button">Update</button>
         </div>
         </form>
+        <button className="update-user-back" onClick={this.toDash}>Back</button>
          </div>
-        <Link to='/dashboard'>Back</Link>
+        </div>
       </div>
     );
   }

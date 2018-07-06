@@ -11,11 +11,25 @@ input.update-input {
   font-size: 17px;
 }
 
+.update-user-back {
+  margin-bottom: 5px;
+}
+
 .update-form {
   display:  flex;
   justify-content:  center;
 }
-
+.update-table {
+  background:  white;
+  margin-top: 50px;
+  border:  1px black solid;
+  border-radius: 4px;
+  width: 450px;
+  align-items:  center;
+  display:  flex;
+  justify-content:  center;
+  flex-direction:  column;
+}
 label.update-label {
   font-size: 20px;
 }
