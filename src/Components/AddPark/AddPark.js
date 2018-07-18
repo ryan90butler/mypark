@@ -45,10 +45,7 @@ class AddPark extends Component {
   }
 
   render() {
-    if(!this.state.parkData){
-      return <div>Loading...</div>
-    }
-    const parkResults = this.state.parkData.map((data, i)=>(
+      const parkResults = this.state.parkData.map((data, i)=>(
       <div className="park-box"key={data.id}>
      <h2>
       {data.fullName}

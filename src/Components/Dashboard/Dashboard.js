@@ -14,13 +14,13 @@ class Dashboard extends Component {
     this.state = {
         firstName: '',
         myParks: [],
-        loading: true
     }
     this.removePark = this.removePark.bind(this);
     this.searchForParks = this.searchForParks.bind(this);
   }
 
 componentDidMount(){
+  setTimeout(function() { alert("The National Park Service API may be experiencing difficulties"); }, 4000);
       this.props.getUser()
       .then((r)=>{
         this.setState({
@@ -32,11 +32,6 @@ componentDidMount(){
         .then(r=>{
         this.setState({
           myParks: r.data,
-        })
-      })
-      .then(r => {
-        this.setState({
-          loading: false
         })
       })
     })
@@ -54,7 +49,7 @@ componentDidMount(){
   }
 
 render() {
-  const myParkData = this.state.myParks.map((data, i)=>(
+    const myParkData = this.state.myParks.map((data, i)=>(
     <div className="my-park-details" key={i}>
     <h2>
     {data.data[0].fullName}

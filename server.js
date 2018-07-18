@@ -4,6 +4,7 @@ const cors = require("cors");
 const massive = require("massive");
 const session = require("express-session");
 const path = require("path");
+const nodemailer = require('nodemailer');
 require("dotenv").config({ path: __dirname + "/.env" });
 
 const app = express();
@@ -60,7 +61,6 @@ app.post(`/api/add-comment`, commentController.addComment);
 app.delete(`/api/remove-comment/:id`, commentController.deleteComments);
 
 //server port
-
 const port = process.env.PORT || 8080;
 app.listen(port, function () {
   console.log(`Server listening on port ${this.address().port}`);
