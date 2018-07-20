@@ -17,29 +17,28 @@ class Login extends Component {
       this.props.history.push('/new-user');
   }
 
-  registerOrLogin(e, login){
-      e.preventDefault();
-      axios.post(`/api/${login}`, {email:this.state.email, password:this.state.password})
-          .then((response)=>{
-              if(response.data.success){
-                  this.props.history.push('/dashboard');
-              }else{
-                  alert("password or your email is incorrect")
-              }
-          })
-          .catch((err)=>{
-              console.log(err)
-          })
-  }
+    registerOrLogin(e, login){
+        e.preventDefault();
+        axios.post(`/api/${login}`, {email:this.state.email, password:this.state.password})
+            .then((response)=>{
+                if(response.data.success){
+                    this.props.history.push('/dashboard');
+                }else{
+                    alert("password or your email is incorrect")
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    }
 
-  handleChange(e){
-      this.setState({
-          [e.target.name]: e.target.value,
-      });
-  }
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+    }
 
-render(){
-
+    render(){
     const { email, password } = this.state;
     const isEnabled =
       email.length > 0 &&
@@ -57,7 +56,7 @@ render(){
         <h2>Login</h2>
         <label>Email</label>
         <br/>
-        <input className="login-input"  name="email" value={this.state.email} onChange={this.handleChange} type="text"/>
+        <input className="login-input"  name="email" value={this.state.email} onChange={this.handleChange} type="email"/>
     </div>
     <br/>
     <div>
