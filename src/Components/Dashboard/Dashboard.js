@@ -20,7 +20,6 @@ class Dashboard extends Component {
   }
 
 componentDidMount(){
-  setTimeout(function() { alert("The National Park Service API may be experiencing difficulties"); }, 2000);
       this.props.getUser()
       .then((r)=>{
         this.setState({
